@@ -16,18 +16,28 @@
     body {
       background: #f5f7fa;
       color: #111827;
+      min-height: 100vh;
     }
 
     header {
       background: #111827;
       color: white;
-      padding: 20px;
+      padding: 22px;
       text-align: center;
+    }
+
+    header h1 {
+      font-size: 28px;
+    }
+
+    header p {
+      margin-top: 6px;
+      opacity: 0.8;
     }
 
     .container {
       max-width: 500px;
-      margin: 40px auto;
+      margin: 30px auto;
       padding: 20px;
     }
 
@@ -35,8 +45,8 @@
       background: white;
       border-radius: 18px;
       padding: 25px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
       margin-bottom: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
     }
 
     .balance {
@@ -48,6 +58,15 @@
     .currency {
       color: #6b7280;
       margin-top: 5px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      margin-top: 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      font-size: 16px;
     }
 
     button {
@@ -62,20 +81,44 @@
       cursor: pointer;
     }
 
-    button:hover {
-      opacity: 0.9;
+    button.secondary {
+      background: #e5e7eb;
+      color: #111827;
+    }
+
+    button.danger {
+      background: #b91c1c;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .message {
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 10px;
+      background: #f3f4f6;
+      display: none;
+    }
+
+    .welcome {
+      margin-bottom: 20px;
     }
   </style>
 </head>
 
 <body>
 
-  <header>
-    <h1>Triple Bank</h1>
-    <p>O teu banco digital</p>
-  </header>
+<header>
+  <h1>Triple Bank</h1>
+  <p>O teu banco digital</p>
+</header>
 
-  <div class="container">
+<div class="container">
+
+  <!-- Página inicial -->
+  <div id="home">
 
     <div class="card">
       <p>Saldo disponível</p>
@@ -85,15 +128,350 @@
 
     <div class="card">
       <h2>Bem-vindo ao Triple Bank</h2>
+
       <p style="margin-top: 10px;">
         A tua plataforma financeira digital.
       </p>
 
-      <button>Entrar na conta</button>
-      <button>Criar conta</button>
+      <button onclick="showLogin()">Entrar na conta</button>
+
+      <button class="secondary" onclick="showRegister()">
+        Criar conta
+      </button>
     </div>
 
   </div>
+
+
+  <!-- Criar conta -->
+  <div id="register" class="hidden">
+
+    <div class="card">
+
+      <h2>Criar conta</h2>
+
+      <input
+        type="text"
+        id="registerName"
+        placeholder="Nome"
+      >
+
+      <input
+        type="email"
+        id="registerEmail"
+        placeholder="Email"
+      >
+
+      <input
+        type="password"
+        id="registerPassword"
+        placeholder="Palavra-passe"
+      >
+
+      <input
+        type="password"
+        id="registerConfirm"
+        placeholder="Confirmar palavra-passe"
+      >
+
+      <button onclick="register()">
+        Criar conta
+      </button>
+
+      <button class="secondary" onclick="showHome()">
+        Voltar
+      </button>
+
+      <div id="registerMessage" class="message"></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- Login -->
+  <div id="login" class="hidden">
+
+    <div class="card">
+
+      <h2>Entrar na conta</h2>
+
+      <input
+        type="email"
+        id="loginEmail"
+        placeholder="Email"
+      >
+
+      <input
+        type="password"
+        id="loginPassword"
+        placeholder="Palavra-passe"
+      >
+
+      <button onclick="login()">
+        Entrar
+      </button>
+
+      <button class="secondary" onclick="showHome()">
+        Voltar
+      </button>
+
+      <div id="loginMessage" class="message"></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- Painel da conta -->
+  <div id="dashboard" class="hidden">
+
+    <div class="card">
+
+      <div class="welcome">
+        <h2>Olá, <span id="userName"></span> 👋</h2>
+      </div>
+
+      <p>Saldo disponível</p>
+
+      <div class="balance">
+        €<span id="userBalance">0,00</span>
+      </div>
+
+      <div class="currency">
+        EUR
+      </div>
+
+    </div>
+
+    <div class="card">
+
+      <h2>Ações</h2>
+
+      <button onclick="alert('Função de adicionar saldo será criada numa próxima etapa.')">
+        💰 Adicionar saldo
+      </button>
+
+      <button onclick="alert('Função de enviar dinheiro será criada numa próxima etapa.')">
+        💸 Enviar
+      </button>
+
+      <button onclick="alert('Função de receber dinheiro será criada numa próxima etapa.')">
+        📥 Receber
+      </button>
+
+      <button onclick="alert('Histórico de transações será criado numa próxima etapa.')">
+        📜 Transações
+      </button>
+
+      <button class="danger" onclick="logout()">
+        Terminar sessão
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+  function hideAll() {
+    document.getElementById("home").classList.add("hidden");
+    document.getElementById("register").classList.add("hidden");
+    document.getElementById("login").classList.add("hidden");
+    document.getElementById("dashboard").classList.add("hidden");
+  }
+
+
+  function showHome() {
+    hideAll();
+    document.getElementById("home").classList.remove("hidden");
+  }
+
+
+  function showRegister() {
+    hideAll();
+    document.getElementById("register").classList.remove("hidden");
+  }
+
+
+  function showLogin() {
+    hideAll();
+    document.getElementById("login").classList.remove("hidden");
+  }
+
+
+  function register() {
+
+    const name =
+      document.getElementById("registerName").value.trim();
+
+    const email =
+      document.getElementById("registerEmail").value.trim();
+
+    const password =
+      document.getElementById("registerPassword").value;
+
+    const confirm =
+      document.getElementById("registerConfirm").value;
+
+    const message =
+      document.getElementById("registerMessage");
+
+
+    if (!name || !email || !password || !confirm) {
+
+      message.style.display = "block";
+      message.textContent =
+        "Preenche todos os campos.";
+
+      return;
+    }
+
+
+    if (password !== confirm) {
+
+      message.style.display = "block";
+      message.textContent =
+        "As palavras-passe não coincidem.";
+
+      return;
+    }
+
+
+    if (password.length < 6) {
+
+      message.style.display = "block";
+      message.textContent =
+        "A palavra-passe deve ter pelo menos 6 caracteres.";
+
+      return;
+    }
+
+
+    const user = {
+      name: name,
+      email: email,
+      password: password,
+      balance: 0
+    };
+
+
+    localStorage.setItem(
+      "tripleBankUser",
+      JSON.stringify(user)
+    );
+
+
+    message.style.display = "block";
+    message.textContent =
+      "Conta criada com sucesso!";
+
+
+    setTimeout(function() {
+
+      showDashboard(user);
+
+    }, 800);
+  }
+
+
+  function login() {
+
+    const email =
+      document.getElementById("loginEmail").value.trim();
+
+    const password =
+      document.getElementById("loginPassword").value;
+
+
+    const savedUser =
+      localStorage.getItem("tripleBankUser");
+
+
+    const message =
+      document.getElementById("loginMessage");
+
+
+    if (!savedUser) {
+
+      message.style.display = "block";
+      message.textContent =
+        "Ainda não existe uma conta neste dispositivo.";
+
+      return;
+    }
+
+
+    const user =
+      JSON.parse(savedUser);
+
+
+    if (
+      email !== user.email ||
+      password !== user.password
+    ) {
+
+      message.style.display = "block";
+      message.textContent =
+        "Email ou palavra-passe incorretos.";
+
+      return;
+    }
+
+
+    showDashboard(user);
+  }
+
+
+  function showDashboard(user) {
+
+    hideAll();
+
+    document
+      .getElementById("dashboard")
+      .classList.remove("hidden");
+
+
+    document
+      .getElementById("userName")
+      .textContent = user.name;
+
+
+    document
+      .getElementById("userBalance")
+      .textContent =
+      Number(user.balance).toFixed(2).replace(".", ",");
+  }
+
+
+  function logout() {
+
+    showHome();
+
+  }
+
+
+  window.onload = function() {
+
+    const savedUser =
+      localStorage.getItem("tripleBankUser");
+
+
+    if (savedUser) {
+
+      const user =
+        JSON.parse(savedUser);
+
+      showDashboard(user);
+
+    }
+
+  };
+
+</script>
 
 </body>
 </html>
