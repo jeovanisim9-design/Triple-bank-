@@ -124,11 +124,13 @@
     .positive {
       color: #15803d;
       font-weight: bold;
+      margin-top: 4px;
     }
 
     .negative {
       color: #b91c1c;
       font-weight: bold;
+      margin-top: 4px;
     }
   </style>
 </head>
@@ -142,7 +144,7 @@
 
 <div class="container">
 
-  <!-- INÍCIO -->
+  <!-- HOME -->
 
   <div id="home">
 
@@ -187,13 +189,29 @@
 
       <h2>Criar conta</h2>
 
-      <input id="registerName" type="text" placeholder="Nome">
+      <input
+        id="registerName"
+        type="text"
+        placeholder="Nome"
+      >
 
-      <input id="registerEmail" type="email" placeholder="Email">
+      <input
+        id="registerEmail"
+        type="email"
+        placeholder="Email"
+      >
 
-      <input id="registerPassword" type="password" placeholder="Palavra-passe">
+      <input
+        id="registerPassword"
+        type="password"
+        placeholder="Palavra-passe"
+      >
 
-      <input id="registerConfirm" type="password" placeholder="Confirmar palavra-passe">
+      <input
+        id="registerConfirm"
+        type="password"
+        placeholder="Confirmar palavra-passe"
+      >
 
       <button onclick="register()">
         Criar conta
@@ -218,9 +236,17 @@
 
       <h2>Entrar na conta</h2>
 
-      <input id="loginEmail" type="email" placeholder="Email">
+      <input
+        id="loginEmail"
+        type="email"
+        placeholder="Email"
+      >
 
-      <input id="loginPassword" type="password" placeholder="Palavra-passe">
+      <input
+        id="loginPassword"
+        type="password"
+        placeholder="Palavra-passe"
+      >
 
       <button onclick="login()">
         Entrar
@@ -237,13 +263,17 @@
   </div>
 
 
-  <!-- PAINEL -->
+  <!-- DASHBOARD -->
 
   <div id="dashboard" class="hidden">
 
+    <!-- SALDO -->
+
     <div class="card">
 
-      <h2>Olá, <span id="userName"></span> 👋</h2>
+      <h2>
+        Olá, <span id="userName"></span> 👋
+      </h2>
 
       <p style="margin-top:20px;">
         Saldo disponível
@@ -336,7 +366,7 @@
     </div>
 
 
-    <!-- TRANSAÇÕES -->
+    <!-- HISTÓRICO -->
 
     <div class="card">
 
@@ -346,6 +376,8 @@
 
     </div>
 
+
+    <!-- LOGOUT -->
 
     <div class="card">
 
@@ -361,6 +393,10 @@
 
 
 <script>
+
+  // ==============================
+  // NAVEGAÇÃO
+  // ==============================
 
   function hideAll() {
 
@@ -402,6 +438,10 @@
   }
 
 
+  // ==============================
+  // UTILIZADOR
+  // ==============================
+
   function getUser() {
 
     const savedUser =
@@ -411,7 +451,28 @@
       return null;
     }
 
-    return JSON.parse(savedUser);
+    const user = JSON.parse(savedUser);
+
+
+    // Corrigir contas criadas
+    // em versões anteriores
+
+    if (typeof user.balance !== "number") {
+
+      user.balance =
+        Number(user.balance) || 0;
+
+    }
+
+
+    if (!Array.isArray(user.transactions)) {
+
+      user.transactions = [];
+
+    }
+
+
+    return user;
 
   }
 
@@ -426,25 +487,44 @@
   }
 
 
+  // ==============================
+  // REGISTAR
+  // ==============================
+
   function register() {
 
     const name =
-      document.getElementById("registerName").value.trim();
+      document
+        .getElementById("registerName")
+        .value
+        .trim();
 
     const email =
-      document.getElementById("registerEmail").value.trim();
+      document
+        .getElementById("registerEmail")
+        .value
+        .trim();
 
     const password =
-      document.getElementById("registerPassword").value;
+      document
+        .getElementById("registerPassword")
+        .value;
 
     const confirm =
-      document.getElementById("registerConfirm").value;
+      document
+        .getElementById("registerConfirm")
+        .value;
 
     const message =
       document.getElementById("registerMessage");
 
 
-    if (!name || !email || !password || !confirm) {
+    if (
+      !name ||
+      !email ||
+      !password ||
+      !confirm
+    ) {
 
       message.style.display = "block";
 
@@ -497,19 +577,27 @@
 
     saveUser(user);
 
-
     showDashboard(user);
 
   }
 
 
+  // ==============================
+  // LOGIN
+  // ==============================
+
   function login() {
 
     const email =
-      document.getElementById("loginEmail").value.trim();
+      document
+        .getElementById("loginEmail")
+        .value
+        .trim();
 
     const password =
-      document.getElementById("loginPassword").value;
+      document
+        .getElementById("loginPassword")
+        .value;
 
     const user = getUser();
 
@@ -549,6 +637,10 @@
   }
 
 
+  // ==============================
+  // DASHBOARD
+  // ==============================
+
   function showDashboard(user) {
 
     hideAll();
@@ -560,20 +652,22 @@
 
     document
       .getElementById("userName")
-      .textContent = user.name;
+      .textContent =
+      user.name;
 
 
     document
       .getElementById("userBalance")
       .textContent =
       Number(user.balance)
-      .toFixed(2)
-      .replace(".", ",");
+        .toFixed(2)
+        .replace(".", ",");
 
 
     document
       .getElementById("receiveEmail")
-      .textContent = user.email;
+      .textContent =
+      user.email;
 
 
     displayTransactions(user);
@@ -581,19 +675,26 @@
   }
 
 
+  // ==============================
+  // ADICIONAR SALDO
+  // ==============================
+
   function addBalance() {
 
-    const amount =
-      Number(
-        document.getElementById("addAmount").value
-      );
+    const input =
+      document.getElementById("addAmount");
 
+    const amount =
+      Number(input.value);
 
     const message =
       document.getElementById("addMessage");
 
 
-    if (!amount || amount <= 0) {
+    if (
+      !Number.isFinite(amount) ||
+      amount <= 0
+    ) {
 
       message.style.display = "block";
 
@@ -608,224 +709,124 @@
     const user = getUser();
 
 
-    user.balance += amount;
+    if (!user) {
 
+      message.style.display = "block";
+
+      message.textContent =
+        "Sessão não encontrada.";
+
+      return;
+
+    }
+
+
+    if (!Array.isArray(user.transactions)) {
+
+      user.transactions = [];
+
+    }
+
+
+    // ADICIONAR AO SALDO
+
+    user.balance =
+      Number(user.balance) + amount;
+
+
+    // CRIAR TRANSAÇÃO
 
     user.transactions.unshift({
 
       type: "Entrada",
 
-      description: "Saldo fictício adicionado",
+      description:
+        "Saldo fictício adicionado",
 
       amount: amount,
 
-      date: new Date().toLocaleString("pt-PT")
+      date:
+        new Date().toLocaleString("pt-PT")
 
     });
 
 
+    // GUARDAR
+
     saveUser(user);
 
 
-    document.getElementById("addAmount").value = "";
+    // LIMPAR CAMPO
+
+    input.value = "";
 
 
-    message.style.display = "block";
-
-    message.textContent =
-      "Saldo fictício adicionado com sucesso.";
-
+    // ATUALIZAR PAINEL
 
     showDashboard(user);
 
+
+    // MENSAGEM
+
+    const updatedMessage =
+      document.getElementById("addMessage");
+
+    updatedMessage.style.display =
+      "block";
+
+    updatedMessage.textContent =
+      "✅ Foram adicionados €" +
+      amount
+        .toFixed(2)
+        .replace(".", ",") +
+      " ao saldo fictício.";
+
   }
 
+
+  // ==============================
+  // ENVIAR DINHEIRO
+  // ==============================
 
   function sendMoney() {
 
     const email =
-      document.getElementById("sendEmail").value.trim();
+      document
+        .getElementById("sendEmail")
+        .value
+        .trim();
 
     const amount =
       Number(
-        document.getElementById("sendAmount").value
+        document
+          .getElementById("sendAmount")
+          .value
       );
-
 
     const message =
       document.getElementById("sendMessage");
 
-
     const user = getUser();
 
 
-    if (!email || !amount || amount <= 0) {
+    if (!user) {
 
       message.style.display = "block";
 
       message.textContent =
-        "Preenche o email e um valor válido.";
+        "Sessão não encontrada.";
 
       return;
 
     }
-
-
-    if (amount > user.balance) {
-
-      message.style.display = "block";
-
-      message.textContent =
-        "Saldo insuficiente.";
-
-      return;
-
-    }
-
-
-    user.balance -= amount;
-
-
-    user.transactions.unshift({
-
-      type: "Saída",
-
-      description:
-        "Envio para " + email,
-
-      amount: -amount,
-
-      date: new Date().toLocaleString("pt-PT")
-
-    });
-
-
-    saveUser(user);
-
-
-    document.getElementById("sendEmail").value = "";
-
-    document.getElementById("sendAmount").value = "";
-
-
-    message.style.display = "block";
-
-    message.textContent =
-      "Envio registado no protótipo.";
-
-
-    showDashboard(user);
-
-  }
-
-
-  function displayTransactions(user) {
-
-    const container =
-      document.getElementById("transactions");
-
-
-    container.innerHTML = "";
 
 
     if (
-      !user.transactions ||
-      user.transactions.length === 0
+      !email ||
+      !Number.isFinite(amount) ||
+      amount <= 0
     ) {
 
-      container.innerHTML =
-        "<p style='margin-top:15px;color:#6b7280;'>Ainda não existem transações.</p>";
+      message.style.display = "block";
 
-      return;
-
-    }
-
-
-    user.transactions.forEach(function(transaction) {
-
-      const div =
-        document.createElement("div");
-
-
-      div.className = "transaction";
-
-
-      const amount =
-        Number(transaction.amount);
-
-
-      const amountText =
-        (amount >= 0 ? "+" : "") +
-        "€" +
-        Math.abs(amount)
-          .toFixed(2)
-          .replace(".", ",");
-
-
-      div.innerHTML =
-
-        "<div class='transaction-title'>" +
-        transaction.description +
-        "</div>" +
-
-        "<div class='" +
-        (amount >= 0 ? "positive" : "negative") +
-        "'>" +
-        amountText +
-        "</div>" +
-
-        "<div class='transaction-date'>" +
-        transaction.date +
-        "</div>";
-
-
-      container.appendChild(div);
-
-    });
-
-  }
-
-
-  function copyReceiveEmail() {
-
-    const user = getUser();
-
-    navigator.clipboard.writeText(user.email);
-
-
-    const message =
-      document.getElementById("receiveMessage");
-
-
-    message.style.display = "block";
-
-    message.textContent =
-      "Email copiado.";
-
-  }
-
-
-  function logout() {
-
-    showHome();
-
-  }
-
-
-  window.onload = function() {
-
-    const user = getUser();
-
-
-    if (user) {
-
-      showDashboard(user);
-
-    }
-
-  };
-
-</script>
-
-</body>
-</html>
+     
