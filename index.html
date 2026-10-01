@@ -77,7 +77,7 @@
       background: #111827;
       color: white;
       font-size: 16px;
-      margin-top: 15px;
+      margin-top: 12px;
       cursor: pointer;
     }
 
@@ -102,8 +102,33 @@
       display: none;
     }
 
-    .welcome {
-      margin-bottom: 20px;
+    .transaction {
+      padding: 14px 0;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .transaction:last-child {
+      border-bottom: none;
+    }
+
+    .transaction-title {
+      font-weight: bold;
+    }
+
+    .transaction-date {
+      color: #6b7280;
+      font-size: 13px;
+      margin-top: 4px;
+    }
+
+    .positive {
+      color: #15803d;
+      font-weight: bold;
+    }
+
+    .negative {
+      color: #b91c1c;
+      font-weight: bold;
     }
   </style>
 </head>
@@ -117,62 +142,58 @@
 
 <div class="container">
 
-  <!-- Página inicial -->
+  <!-- INÍCIO -->
+
   <div id="home">
 
     <div class="card">
       <p>Saldo disponível</p>
-      <div class="balance">€0,00</div>
-      <div class="currency">EUR</div>
+
+      <div class="balance">
+        €0,00
+      </div>
+
+      <div class="currency">
+        EUR
+      </div>
     </div>
 
     <div class="card">
+
       <h2>Bem-vindo ao Triple Bank</h2>
 
-      <p style="margin-top: 10px;">
+      <p style="margin-top:10px;">
         A tua plataforma financeira digital.
       </p>
 
-      <button onclick="showLogin()">Entrar na conta</button>
+      <button onclick="showLogin()">
+        Entrar na conta
+      </button>
 
       <button class="secondary" onclick="showRegister()">
         Criar conta
       </button>
+
     </div>
 
   </div>
 
 
-  <!-- Criar conta -->
+  <!-- REGISTO -->
+
   <div id="register" class="hidden">
 
     <div class="card">
 
       <h2>Criar conta</h2>
 
-      <input
-        type="text"
-        id="registerName"
-        placeholder="Nome"
-      >
+      <input id="registerName" type="text" placeholder="Nome">
 
-      <input
-        type="email"
-        id="registerEmail"
-        placeholder="Email"
-      >
+      <input id="registerEmail" type="email" placeholder="Email">
 
-      <input
-        type="password"
-        id="registerPassword"
-        placeholder="Palavra-passe"
-      >
+      <input id="registerPassword" type="password" placeholder="Palavra-passe">
 
-      <input
-        type="password"
-        id="registerConfirm"
-        placeholder="Confirmar palavra-passe"
-      >
+      <input id="registerConfirm" type="password" placeholder="Confirmar palavra-passe">
 
       <button onclick="register()">
         Criar conta
@@ -189,24 +210,17 @@
   </div>
 
 
-  <!-- Login -->
+  <!-- LOGIN -->
+
   <div id="login" class="hidden">
 
     <div class="card">
 
       <h2>Entrar na conta</h2>
 
-      <input
-        type="email"
-        id="loginEmail"
-        placeholder="Email"
-      >
+      <input id="loginEmail" type="email" placeholder="Email">
 
-      <input
-        type="password"
-        id="loginPassword"
-        placeholder="Palavra-passe"
-      >
+      <input id="loginPassword" type="password" placeholder="Palavra-passe">
 
       <button onclick="login()">
         Entrar
@@ -223,16 +237,17 @@
   </div>
 
 
-  <!-- Painel da conta -->
+  <!-- PAINEL -->
+
   <div id="dashboard" class="hidden">
 
     <div class="card">
 
-      <div class="welcome">
-        <h2>Olá, <span id="userName"></span> 👋</h2>
-      </div>
+      <h2>Olá, <span id="userName"></span> 👋</h2>
 
-      <p>Saldo disponível</p>
+      <p style="margin-top:20px;">
+        Saldo disponível
+      </p>
 
       <div class="balance">
         €<span id="userBalance">0,00</span>
@@ -244,25 +259,95 @@
 
     </div>
 
+
+    <!-- ADICIONAR SALDO -->
+
     <div class="card">
 
-      <h2>Ações</h2>
+      <h2>Adicionar saldo</h2>
 
-      <button onclick="alert('Função de adicionar saldo será criada numa próxima etapa.')">
-        💰 Adicionar saldo
+      <input
+        id="addAmount"
+        type="number"
+        min="0"
+        step="0.01"
+        placeholder="Valor em €"
+      >
+
+      <button onclick="addBalance()">
+        💰 Adicionar saldo fictício
       </button>
 
-      <button onclick="alert('Função de enviar dinheiro será criada numa próxima etapa.')">
-        💸 Enviar
+      <div id="addMessage" class="message"></div>
+
+    </div>
+
+
+    <!-- ENVIAR -->
+
+    <div class="card">
+
+      <h2>Enviar</h2>
+
+      <input
+        id="sendEmail"
+        type="email"
+        placeholder="Email do destinatário"
+      >
+
+      <input
+        id="sendAmount"
+        type="number"
+        min="0"
+        step="0.01"
+        placeholder="Valor em €"
+      >
+
+      <button onclick="sendMoney()">
+        💸 Enviar saldo
       </button>
 
-      <button onclick="alert('Função de receber dinheiro será criada numa próxima etapa.')">
-        📥 Receber
+      <div id="sendMessage" class="message"></div>
+
+    </div>
+
+
+    <!-- RECEBER -->
+
+    <div class="card">
+
+      <h2>Receber</h2>
+
+      <p style="margin-top:10px;">
+        O teu email para receber saldo:
+      </p>
+
+      <p
+        id="receiveEmail"
+        style="margin-top:10px;font-weight:bold;"
+      ></p>
+
+      <button onclick="copyReceiveEmail()">
+        📥 Copiar email
       </button>
 
-      <button onclick="alert('Histórico de transações será criado numa próxima etapa.')">
-        📜 Transações
-      </button>
+      <div id="receiveMessage" class="message"></div>
+
+    </div>
+
+
+    <!-- TRANSAÇÕES -->
+
+    <div class="card">
+
+      <h2>Histórico</h2>
+
+      <div id="transactions"></div>
+
+    </div>
+
+
+    <div class="card">
 
       <button class="danger" onclick="logout()">
         Terminar sessão
@@ -278,28 +363,66 @@
 <script>
 
   function hideAll() {
+
     document.getElementById("home").classList.add("hidden");
+
     document.getElementById("register").classList.add("hidden");
+
     document.getElementById("login").classList.add("hidden");
+
     document.getElementById("dashboard").classList.add("hidden");
+
   }
 
 
   function showHome() {
+
     hideAll();
+
     document.getElementById("home").classList.remove("hidden");
+
   }
 
 
   function showRegister() {
+
     hideAll();
+
     document.getElementById("register").classList.remove("hidden");
+
   }
 
 
   function showLogin() {
+
     hideAll();
+
     document.getElementById("login").classList.remove("hidden");
+
+  }
+
+
+  function getUser() {
+
+    const savedUser =
+      localStorage.getItem("tripleBankUser");
+
+    if (!savedUser) {
+      return null;
+    }
+
+    return JSON.parse(savedUser);
+
+  }
+
+
+  function saveUser(user) {
+
+    localStorage.setItem(
+      "tripleBankUser",
+      JSON.stringify(user)
+    );
+
   }
 
 
@@ -324,57 +447,59 @@
     if (!name || !email || !password || !confirm) {
 
       message.style.display = "block";
+
       message.textContent =
         "Preenche todos os campos.";
 
       return;
+
     }
 
 
     if (password !== confirm) {
 
       message.style.display = "block";
+
       message.textContent =
         "As palavras-passe não coincidem.";
 
       return;
+
     }
 
 
     if (password.length < 6) {
 
       message.style.display = "block";
+
       message.textContent =
         "A palavra-passe deve ter pelo menos 6 caracteres.";
 
       return;
+
     }
 
 
     const user = {
+
       name: name,
+
       email: email,
+
       password: password,
-      balance: 0
+
+      balance: 0,
+
+      transactions: []
+
     };
 
 
-    localStorage.setItem(
-      "tripleBankUser",
-      JSON.stringify(user)
-    );
+    saveUser(user);
 
 
-    message.style.display = "block";
-    message.textContent =
-      "Conta criada com sucesso!";
+    showDashboard(user);
 
-
-    setTimeout(function() {
-
-      showDashboard(user);
-
-    }, 800);
   }
 
 
@@ -386,27 +511,22 @@
     const password =
       document.getElementById("loginPassword").value;
 
-
-    const savedUser =
-      localStorage.getItem("tripleBankUser");
-
+    const user = getUser();
 
     const message =
       document.getElementById("loginMessage");
 
 
-    if (!savedUser) {
+    if (!user) {
 
       message.style.display = "block";
+
       message.textContent =
         "Ainda não existe uma conta neste dispositivo.";
 
       return;
+
     }
-
-
-    const user =
-      JSON.parse(savedUser);
 
 
     if (
@@ -415,14 +535,17 @@
     ) {
 
       message.style.display = "block";
+
       message.textContent =
         "Email ou palavra-passe incorretos.";
 
       return;
+
     }
 
 
     showDashboard(user);
+
   }
 
 
@@ -443,7 +566,242 @@
     document
       .getElementById("userBalance")
       .textContent =
-      Number(user.balance).toFixed(2).replace(".", ",");
+      Number(user.balance)
+      .toFixed(2)
+      .replace(".", ",");
+
+
+    document
+      .getElementById("receiveEmail")
+      .textContent = user.email;
+
+
+    displayTransactions(user);
+
+  }
+
+
+  function addBalance() {
+
+    const amount =
+      Number(
+        document.getElementById("addAmount").value
+      );
+
+
+    const message =
+      document.getElementById("addMessage");
+
+
+    if (!amount || amount <= 0) {
+
+      message.style.display = "block";
+
+      message.textContent =
+        "Introduz um valor válido.";
+
+      return;
+
+    }
+
+
+    const user = getUser();
+
+
+    user.balance += amount;
+
+
+    user.transactions.unshift({
+
+      type: "Entrada",
+
+      description: "Saldo fictício adicionado",
+
+      amount: amount,
+
+      date: new Date().toLocaleString("pt-PT")
+
+    });
+
+
+    saveUser(user);
+
+
+    document.getElementById("addAmount").value = "";
+
+
+    message.style.display = "block";
+
+    message.textContent =
+      "Saldo fictício adicionado com sucesso.";
+
+
+    showDashboard(user);
+
+  }
+
+
+  function sendMoney() {
+
+    const email =
+      document.getElementById("sendEmail").value.trim();
+
+    const amount =
+      Number(
+        document.getElementById("sendAmount").value
+      );
+
+
+    const message =
+      document.getElementById("sendMessage");
+
+
+    const user = getUser();
+
+
+    if (!email || !amount || amount <= 0) {
+
+      message.style.display = "block";
+
+      message.textContent =
+        "Preenche o email e um valor válido.";
+
+      return;
+
+    }
+
+
+    if (amount > user.balance) {
+
+      message.style.display = "block";
+
+      message.textContent =
+        "Saldo insuficiente.";
+
+      return;
+
+    }
+
+
+    user.balance -= amount;
+
+
+    user.transactions.unshift({
+
+      type: "Saída",
+
+      description:
+        "Envio para " + email,
+
+      amount: -amount,
+
+      date: new Date().toLocaleString("pt-PT")
+
+    });
+
+
+    saveUser(user);
+
+
+    document.getElementById("sendEmail").value = "";
+
+    document.getElementById("sendAmount").value = "";
+
+
+    message.style.display = "block";
+
+    message.textContent =
+      "Envio registado no protótipo.";
+
+
+    showDashboard(user);
+
+  }
+
+
+  function displayTransactions(user) {
+
+    const container =
+      document.getElementById("transactions");
+
+
+    container.innerHTML = "";
+
+
+    if (
+      !user.transactions ||
+      user.transactions.length === 0
+    ) {
+
+      container.innerHTML =
+        "<p style='margin-top:15px;color:#6b7280;'>Ainda não existem transações.</p>";
+
+      return;
+
+    }
+
+
+    user.transactions.forEach(function(transaction) {
+
+      const div =
+        document.createElement("div");
+
+
+      div.className = "transaction";
+
+
+      const amount =
+        Number(transaction.amount);
+
+
+      const amountText =
+        (amount >= 0 ? "+" : "") +
+        "€" +
+        Math.abs(amount)
+          .toFixed(2)
+          .replace(".", ",");
+
+
+      div.innerHTML =
+
+        "<div class='transaction-title'>" +
+        transaction.description +
+        "</div>" +
+
+        "<div class='" +
+        (amount >= 0 ? "positive" : "negative") +
+        "'>" +
+        amountText +
+        "</div>" +
+
+        "<div class='transaction-date'>" +
+        transaction.date +
+        "</div>";
+
+
+      container.appendChild(div);
+
+    });
+
+  }
+
+
+  function copyReceiveEmail() {
+
+    const user = getUser();
+
+    navigator.clipboard.writeText(user.email);
+
+
+    const message =
+      document.getElementById("receiveMessage");
+
+
+    message.style.display = "block";
+
+    message.textContent =
+      "Email copiado.";
+
   }
 
 
@@ -456,14 +814,10 @@
 
   window.onload = function() {
 
-    const savedUser =
-      localStorage.getItem("tripleBankUser");
+    const user = getUser();
 
 
-    if (savedUser) {
-
-      const user =
-        JSON.parse(savedUser);
+    if (user) {
 
       showDashboard(user);
 
