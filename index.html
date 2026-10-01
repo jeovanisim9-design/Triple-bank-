@@ -1,832 +1,1152 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Triple Bank</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
+<title>Triple Bank</title>
 
-    body {
-      background: #f5f7fa;
-      color: #111827;
-      min-height: 100vh;
-    }
+<style>
 
-    header {
-      background: #111827;
-      color: white;
-      padding: 22px;
-      text-align: center;
-    }
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,sans-serif;
+}
 
-    header h1 {
-      font-size: 28px;
-    }
+body{
+  background:#f5f7fa;
+  color:#111827;
+  min-height:100vh;
+}
 
-    header p {
-      margin-top: 6px;
-      opacity: 0.8;
-    }
+header{
+  background:#111827;
+  color:white;
+  text-align:center;
+  padding:24px 20px;
+}
 
-    .container {
-      max-width: 500px;
-      margin: 30px auto;
-      padding: 20px;
-    }
+header h1{
+  font-size:30px;
+}
 
-    .card {
-      background: white;
-      border-radius: 18px;
-      padding: 25px;
-      margin-bottom: 20px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    }
+header p{
+  margin-top:6px;
+  opacity:.8;
+}
 
-    .balance {
-      font-size: 36px;
-      font-weight: bold;
-      margin-top: 10px;
-    }
+.container{
+  max-width:500px;
+  margin:auto;
+  padding:25px 20px;
+}
 
-    .currency {
-      color: #6b7280;
-      margin-top: 5px;
-    }
+.card{
+  background:white;
+  border-radius:20px;
+  padding:25px;
+  margin-bottom:20px;
+  box-shadow:0 4px 20px rgba(0,0,0,.08);
+}
 
-    input {
-      width: 100%;
-      padding: 14px;
-      margin-top: 12px;
-      border: 1px solid #d1d5db;
-      border-radius: 10px;
-      font-size: 16px;
-    }
+h2{
+  font-size:26px;
+}
 
-    button {
-      width: 100%;
-      padding: 15px;
-      border: none;
-      border-radius: 10px;
-      background: #111827;
-      color: white;
-      font-size: 16px;
-      margin-top: 12px;
-      cursor: pointer;
-    }
+p{
+  line-height:1.5;
+}
 
-    button.secondary {
-      background: #e5e7eb;
-      color: #111827;
-    }
+.balance{
+  font-size:42px;
+  font-weight:bold;
+  margin-top:12px;
+}
 
-    button.danger {
-      background: #b91c1c;
-    }
+.currency{
+  color:#6b7280;
+  margin-top:5px;
+}
 
-    .hidden {
-      display: none;
-    }
+input{
+  width:100%;
+  padding:15px;
+  margin-top:12px;
+  border:1px solid #d1d5db;
+  border-radius:12px;
+  font-size:16px;
+  outline:none;
+}
 
-    .message {
-      margin-top: 15px;
-      padding: 12px;
-      border-radius: 10px;
-      background: #f3f4f6;
-      display: none;
-    }
+input:focus{
+  border-color:#111827;
+}
 
-    .transaction {
-      padding: 14px 0;
-      border-bottom: 1px solid #e5e7eb;
-    }
+button{
+  width:100%;
+  padding:16px;
+  margin-top:12px;
+  border:0;
+  border-radius:12px;
+  background:#111827;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+}
 
-    .transaction:last-child {
-      border-bottom: none;
-    }
+button:active{
+  transform:scale(.98);
+}
 
-    .transaction-title {
-      font-weight: bold;
-    }
+.secondary{
+  background:#e5e7eb;
+  color:#111827;
+}
 
-    .transaction-date {
-      color: #6b7280;
-      font-size: 13px;
-      margin-top: 4px;
-    }
+.danger{
+  background:#b91c1c;
+}
 
-    .positive {
-      color: #15803d;
-      font-weight: bold;
-      margin-top: 4px;
-    }
+.hidden{
+  display:none !important;
+}
 
-    .negative {
-      color: #b91c1c;
-      font-weight: bold;
-      margin-top: 4px;
-    }
-  </style>
+.message{
+  display:none;
+  margin-top:15px;
+  padding:12px;
+  background:#f3f4f6;
+  border-radius:10px;
+}
+
+.transaction{
+  padding:15px 0;
+  border-bottom:1px solid #e5e7eb;
+}
+
+.transaction:last-child{
+  border-bottom:0;
+}
+
+.transaction-title{
+  font-weight:bold;
+}
+
+.transaction-date{
+  color:#6b7280;
+  font-size:13px;
+  margin-top:4px;
+}
+
+.positive{
+  color:#15803d;
+  font-weight:bold;
+  margin-top:4px;
+}
+
+.negative{
+  color:#b91c1c;
+  font-weight:bold;
+  margin-top:4px;
+}
+
+</style>
 </head>
+
 
 <body>
 
 <header>
-  <h1>Triple Bank</h1>
-  <p>O teu banco digital</p>
+
+<h1>Triple Bank</h1>
+
+<p>O teu banco digital</p>
+
 </header>
+
 
 <div class="container">
 
-  <!-- HOME -->
 
-  <div id="home">
+<!-- HOME -->
 
-    <div class="card">
-      <p>Saldo disponível</p>
+<section id="home">
 
-      <div class="balance">
-        €0,00
-      </div>
+<div class="card">
 
-      <div class="currency">
-        EUR
-      </div>
-    </div>
+<p>Saldo disponível</p>
 
-    <div class="card">
+<div class="balance">
+€0,00
+</div>
 
-      <h2>Bem-vindo ao Triple Bank</h2>
-
-      <p style="margin-top:10px;">
-        A tua plataforma financeira digital.
-      </p>
-
-      <button onclick="showLogin()">
-        Entrar na conta
-      </button>
-
-      <button class="secondary" onclick="showRegister()">
-        Criar conta
-      </button>
-
-    </div>
-
-  </div>
-
-
-  <!-- REGISTO -->
-
-  <div id="register" class="hidden">
-
-    <div class="card">
-
-      <h2>Criar conta</h2>
-
-      <input
-        id="registerName"
-        type="text"
-        placeholder="Nome"
-      >
-
-      <input
-        id="registerEmail"
-        type="email"
-        placeholder="Email"
-      >
-
-      <input
-        id="registerPassword"
-        type="password"
-        placeholder="Palavra-passe"
-      >
-
-      <input
-        id="registerConfirm"
-        type="password"
-        placeholder="Confirmar palavra-passe"
-      >
-
-      <button onclick="register()">
-        Criar conta
-      </button>
-
-      <button class="secondary" onclick="showHome()">
-        Voltar
-      </button>
-
-      <div id="registerMessage" class="message"></div>
-
-    </div>
-
-  </div>
-
-
-  <!-- LOGIN -->
-
-  <div id="login" class="hidden">
-
-    <div class="card">
-
-      <h2>Entrar na conta</h2>
-
-      <input
-        id="loginEmail"
-        type="email"
-        placeholder="Email"
-      >
-
-      <input
-        id="loginPassword"
-        type="password"
-        placeholder="Palavra-passe"
-      >
-
-      <button onclick="login()">
-        Entrar
-      </button>
-
-      <button class="secondary" onclick="showHome()">
-        Voltar
-      </button>
-
-      <div id="loginMessage" class="message"></div>
-
-    </div>
-
-  </div>
-
-
-  <!-- DASHBOARD -->
-
-  <div id="dashboard" class="hidden">
-
-    <!-- SALDO -->
-
-    <div class="card">
-
-      <h2>
-        Olá, <span id="userName"></span> 👋
-      </h2>
-
-      <p style="margin-top:20px;">
-        Saldo disponível
-      </p>
-
-      <div class="balance">
-        €<span id="userBalance">0,00</span>
-      </div>
-
-      <div class="currency">
-        EUR
-      </div>
-
-    </div>
-
-
-    <!-- ADICIONAR SALDO -->
-
-    <div class="card">
-
-      <h2>Adicionar saldo</h2>
-
-      <input
-        id="addAmount"
-        type="number"
-        min="0"
-        step="0.01"
-        placeholder="Valor em €"
-      >
-
-      <button onclick="addBalance()">
-        💰 Adicionar saldo fictício
-      </button>
-
-      <div id="addMessage" class="message"></div>
-
-    </div>
-
-
-    <!-- ENVIAR -->
-
-    <div class="card">
-
-      <h2>Enviar</h2>
-
-      <input
-        id="sendEmail"
-        type="email"
-        placeholder="Email do destinatário"
-      >
-
-      <input
-        id="sendAmount"
-        type="number"
-        min="0"
-        step="0.01"
-        placeholder="Valor em €"
-      >
-
-      <button onclick="sendMoney()">
-        💸 Enviar saldo
-      </button>
-
-      <div id="sendMessage" class="message"></div>
-
-    </div>
-
-
-    <!-- RECEBER -->
-
-    <div class="card">
-
-      <h2>Receber</h2>
-
-      <p style="margin-top:10px;">
-        O teu email para receber saldo:
-      </p>
-
-      <p
-        id="receiveEmail"
-        style="margin-top:10px;font-weight:bold;"
-      ></p>
-
-      <button onclick="copyReceiveEmail()">
-        📥 Copiar email
-      </button>
-
-      <div id="receiveMessage" class="message"></div>
-
-    </div>
-
-
-    <!-- HISTÓRICO -->
-
-    <div class="card">
-
-      <h2>Histórico</h2>
-
-      <div id="transactions"></div>
-
-    </div>
-
-
-    <!-- LOGOUT -->
-
-    <div class="card">
-
-      <button class="danger" onclick="logout()">
-        Terminar sessão
-      </button>
-
-    </div>
-
-  </div>
+<div class="currency">
+EUR
+</div>
 
 </div>
 
 
+<div class="card">
+
+<h2>Bem-vindo ao Triple Bank</h2>
+
+<p style="margin-top:10px;">
+A tua plataforma financeira digital.
+</p>
+
+
+<button id="loginButton">
+Entrar na conta
+</button>
+
+
+<button id="registerButton" class="secondary">
+Criar conta
+</button>
+
+</div>
+
+</section>
+
+
+
+<!-- REGISTO -->
+
+<section id="register" class="hidden">
+
+<div class="card">
+
+<h2>Criar conta</h2>
+
+
+<input
+id="registerName"
+type="text"
+placeholder="Nome"
+>
+
+
+<input
+id="registerEmail"
+type="email"
+placeholder="Email"
+>
+
+
+<input
+id="registerPassword"
+type="password"
+placeholder="Palavra-passe"
+>
+
+
+<input
+id="registerConfirm"
+type="password"
+placeholder="Confirmar palavra-passe"
+>
+
+
+<button id="createAccountButton">
+Criar conta
+</button>
+
+
+<button id="backFromRegister" class="secondary">
+Voltar
+</button>
+
+
+<div id="registerMessage" class="message"></div>
+
+</div>
+
+</section>
+
+
+
+<!-- LOGIN -->
+
+<section id="login" class="hidden">
+
+<div class="card">
+
+<h2>Entrar na conta</h2>
+
+
+<input
+id="loginEmail"
+type="email"
+placeholder="Email"
+>
+
+
+<input
+id="loginPassword"
+type="password"
+placeholder="Palavra-passe"
+>
+
+
+<button id="enterButton">
+Entrar
+</button>
+
+
+<button id="backFromLogin" class="secondary">
+Voltar
+</button>
+
+
+<div id="loginMessage" class="message"></div>
+
+</div>
+
+</section>
+
+
+
+<!-- DASHBOARD -->
+
+<section id="dashboard" class="hidden">
+
+
+<div class="card">
+
+<h2>
+Olá, <span id="userName"></span> 👋
+</h2>
+
+
+<p style="margin-top:20px;">
+Saldo disponível
+</p>
+
+
+<div class="balance">
+€<span id="userBalance">0,00</span>
+</div>
+
+
+<div class="currency">
+EUR
+</div>
+
+</div>
+
+
+
+<!-- ADICIONAR -->
+
+<div class="card">
+
+<h2>Adicionar saldo</h2>
+
+
+<input
+id="addAmount"
+type="number"
+min="0"
+step="0.01"
+placeholder="Valor em €"
+>
+
+
+<button id="addButton">
+💰 Adicionar saldo fictício
+</button>
+
+
+<div id="addMessage" class="message"></div>
+
+</div>
+
+
+
+<!-- ENVIAR -->
+
+<div class="card">
+
+<h2>Enviar</h2>
+
+
+<input
+id="sendEmail"
+type="email"
+placeholder="Email do destinatário"
+>
+
+
+<input
+id="sendAmount"
+type="number"
+min="0"
+step="0.01"
+placeholder="Valor em €"
+>
+
+
+<button id="sendButton">
+💸 Enviar saldo
+</button>
+
+
+<div id="sendMessage" class="message"></div>
+
+</div>
+
+
+
+<!-- RECEBER -->
+
+<div class="card">
+
+<h2>Receber</h2>
+
+
+<p style="margin-top:10px;">
+O teu email:
+</p>
+
+
+<p
+id="receiveEmail"
+style="font-weight:bold;margin-top:8px;"
+></p>
+
+
+<button id="copyButton">
+📥 Copiar email
+</button>
+
+
+<div id="receiveMessage" class="message"></div>
+
+</div>
+
+
+
+<!-- HISTÓRICO -->
+
+<div class="card">
+
+<h2>Histórico</h2>
+
+
+<div id="transactions"></div>
+
+</div>
+
+
+
+<!-- LOGOUT -->
+
+<div class="card">
+
+<button id="logoutButton" class="danger">
+Terminar sessão
+</button>
+
+</div>
+
+
+</section>
+
+</div>
+
+
+
 <script>
 
-  // ==============================
-  // NAVEGAÇÃO
-  // ==============================
+/* =====================================
+   SISTEMA DE NAVEGAÇÃO
+===================================== */
 
-  function hideAll() {
+const home =
+document.getElementById("home");
 
-    document.getElementById("home").classList.add("hidden");
+const register =
+document.getElementById("register");
 
-    document.getElementById("register").classList.add("hidden");
+const login =
+document.getElementById("login");
 
-    document.getElementById("login").classList.add("hidden");
+const dashboard =
+document.getElementById("dashboard");
 
-    document.getElementById("dashboard").classList.add("hidden");
 
-  }
+function showPage(page){
 
+home.classList.add("hidden");
 
-  function showHome() {
+register.classList.add("hidden");
 
-    hideAll();
+login.classList.add("hidden");
 
-    document.getElementById("home").classList.remove("hidden");
+dashboard.classList.add("hidden");
 
-  }
+page.classList.remove("hidden");
 
+}
 
-  function showRegister() {
 
-    hideAll();
+/* =====================================
+   BOTÕES DE NAVEGAÇÃO
+===================================== */
 
-    document.getElementById("register").classList.remove("hidden");
+document
+.getElementById("loginButton")
+.addEventListener("click",function(){
 
-  }
+showPage(login);
 
+});
 
-  function showLogin() {
 
-    hideAll();
+document
+.getElementById("registerButton")
+.addEventListener("click",function(){
 
-    document.getElementById("login").classList.remove("hidden");
+showPage(register);
 
-  }
+});
 
 
-  // ==============================
-  // UTILIZADOR
-  // ==============================
+document
+.getElementById("backFromRegister")
+.addEventListener("click",function(){
 
-  function getUser() {
+showPage(home);
 
-    const savedUser =
-      localStorage.getItem("tripleBankUser");
+});
 
-    if (!savedUser) {
-      return null;
-    }
 
-    const user = JSON.parse(savedUser);
+document
+.getElementById("backFromLogin")
+.addEventListener("click",function(){
 
+showPage(home);
 
-    // Corrigir contas criadas
-    // em versões anteriores
+});
 
-    if (typeof user.balance !== "number") {
 
-      user.balance =
-        Number(user.balance) || 0;
+/* =====================================
+   UTILIZADOR
+===================================== */
 
-    }
+function getUser(){
 
+const saved =
+localStorage.getItem("tripleBankUser");
 
-    if (!Array.isArray(user.transactions)) {
+if(!saved){
 
-      user.transactions = [];
+return null;
 
-    }
+}
 
+try{
 
-    return user;
+const user =
+JSON.parse(saved);
 
-  }
 
+if(typeof user.balance !== "number"){
 
-  function saveUser(user) {
+user.balance =
+Number(user.balance) || 0;
 
-    localStorage.setItem(
-      "tripleBankUser",
-      JSON.stringify(user)
-    );
+}
 
-  }
 
+if(!Array.isArray(user.transactions)){
 
-  // ==============================
-  // REGISTAR
-  // ==============================
+user.transactions = [];
 
-  function register() {
+}
 
-    const name =
-      document
-        .getElementById("registerName")
-        .value
-        .trim();
 
-    const email =
-      document
-        .getElementById("registerEmail")
-        .value
-        .trim();
+return user;
 
-    const password =
-      document
-        .getElementById("registerPassword")
-        .value;
+}catch(error){
 
-    const confirm =
-      document
-        .getElementById("registerConfirm")
-        .value;
+console.log(error);
 
-    const message =
-      document.getElementById("registerMessage");
+localStorage.removeItem("tripleBankUser");
 
+return null;
 
-    if (
-      !name ||
-      !email ||
-      !password ||
-      !confirm
-    ) {
+}
 
-      message.style.display = "block";
+}
 
-      message.textContent =
-        "Preenche todos os campos.";
 
-      return;
+function saveUser(user){
 
-    }
+localStorage.setItem(
+"tripleBankUser",
+JSON.stringify(user)
+);
 
+}
 
-    if (password !== confirm) {
 
-      message.style.display = "block";
+/* =====================================
+   REGISTAR CONTA
+===================================== */
 
-      message.textContent =
-        "As palavras-passe não coincidem.";
+document
+.getElementById("createAccountButton")
+.addEventListener("click",function(){
 
-      return;
+const name =
+document
+.getElementById("registerName")
+.value
+.trim();
 
-    }
 
+const email =
+document
+.getElementById("registerEmail")
+.value
+.trim();
 
-    if (password.length < 6) {
 
-      message.style.display = "block";
+const password =
+document
+.getElementById("registerPassword")
+.value;
 
-      message.textContent =
-        "A palavra-passe deve ter pelo menos 6 caracteres.";
 
-      return;
+const confirm =
+document
+.getElementById("registerConfirm")
+.value;
 
-    }
 
+const message =
+document
+.getElementById("registerMessage");
 
-    const user = {
 
-      name: name,
+if(!name ||
+!email ||
+!password ||
+!confirm){
 
-      email: email,
+message.style.display="block";
 
-      password: password,
+message.textContent=
+"Preenche todos os campos.";
 
-      balance: 0,
+return;
 
-      transactions: []
+}
 
-    };
 
+if(password !== confirm){
 
-    saveUser(user);
+message.style.display="block";
 
-    showDashboard(user);
+message.textContent=
+"As palavras-passe não coincidem.";
 
-  }
+return;
 
+}
 
-  // ==============================
-  // LOGIN
-  // ==============================
 
-  function login() {
+if(password.length < 6){
 
-    const email =
-      document
-        .getElementById("loginEmail")
-        .value
-        .trim();
+message.style.display="block";
 
-    const password =
-      document
-        .getElementById("loginPassword")
-        .value;
+message.textContent=
+"A palavra-passe deve ter pelo menos 6 caracteres.";
 
-    const user = getUser();
+return;
 
-    const message =
-      document.getElementById("loginMessage");
+}
 
 
-    if (!user) {
+const user={
 
-      message.style.display = "block";
+name:name,
 
-      message.textContent =
-        "Ainda não existe uma conta neste dispositivo.";
+email:email,
 
-      return;
+password:password,
 
-    }
+balance:0,
 
+transactions:[]
 
-    if (
-      email !== user.email ||
-      password !== user.password
-    ) {
+};
 
-      message.style.display = "block";
 
-      message.textContent =
-        "Email ou palavra-passe incorretos.";
+saveUser(user);
 
-      return;
+showDashboard(user);
 
-    }
+});
 
 
-    showDashboard(user);
+/* =====================================
+   LOGIN
+===================================== */
 
-  }
+document
+.getElementById("enterButton")
+.addEventListener("click",function(){
 
+const email =
+document
+.getElementById("loginEmail")
+.value
+.trim();
 
-  // ==============================
-  // DASHBOARD
-  // ==============================
 
-  function showDashboard(user) {
+const password =
+document
+.getElementById("loginPassword")
+.value;
 
-    hideAll();
 
-    document
-      .getElementById("dashboard")
-      .classList.remove("hidden");
+const message =
+document
+.getElementById("loginMessage");
 
 
-    document
-      .getElementById("userName")
-      .textContent =
-      user.name;
+const user =
+getUser();
 
 
-    document
-      .getElementById("userBalance")
-      .textContent =
-      Number(user.balance)
-        .toFixed(2)
-        .replace(".", ",");
+if(!user){
 
+message.style.display="block";
 
-    document
-      .getElementById("receiveEmail")
-      .textContent =
-      user.email;
+message.textContent=
+"Nenhuma conta encontrada neste dispositivo.";
 
+return;
 
-    displayTransactions(user);
+}
 
-  }
 
+if(
+email !== user.email ||
+password !== user.password
+){
 
-  // ==============================
-  // ADICIONAR SALDO
-  // ==============================
+message.style.display="block";
 
-  function addBalance() {
+message.textContent=
+"Email ou palavra-passe incorretos.";
 
-    const input =
-      document.getElementById("addAmount");
+return;
 
-    const amount =
-      Number(input.value);
+}
 
-    const message =
-      document.getElementById("addMessage");
 
+showDashboard(user);
 
-    if (
-      !Number.isFinite(amount) ||
-      amount <= 0
-    ) {
+});
 
-      message.style.display = "block";
 
-      message.textContent =
-        "Introduz um valor válido.";
+/* =====================================
+   MOSTRAR DASHBOARD
+===================================== */
 
-      return;
+function showDashboard(user){
 
-    }
+showPage(dashboard);
 
 
-    const user = getUser();
+document
+.getElementById("userName")
+.textContent=user.name;
 
 
-    if (!user) {
+document
+.getElementById("userBalance")
+.textContent=
+Number(user.balance)
+.toFixed(2)
+.replace(".",",");
 
-      message.style.display = "block";
 
-      message.textContent =
-        "Sessão não encontrada.";
+document
+.getElementById("receiveEmail")
+.textContent=user.email;
 
-      return;
 
-    }
+displayTransactions(user);
 
+}
 
-    if (!Array.isArray(user.transactions)) {
 
-      user.transactions = [];
+/* =====================================
+   ADICIONAR SALDO
+===================================== */
 
-    }
+document
+.getElementById("addButton")
+.addEventListener("click",function(){
 
+const input =
+document
+.getElementById("addAmount");
 
-    // ADICIONAR AO SALDO
 
-    user.balance =
-      Number(user.balance) + amount;
+const amount =
+Number(input.value);
 
 
-    // CRIAR TRANSAÇÃO
+const message =
+document
+.getElementById("addMessage");
 
-    user.transactions.unshift({
 
-      type: "Entrada",
+if(!Number.isFinite(amount) ||
+amount <= 0){
 
-      description:
-        "Saldo fictício adicionado",
+message.style.display="block";
 
-      amount: amount,
+message.textContent=
+"Introduz um valor válido.";
 
-      date:
-        new Date().toLocaleString("pt-PT")
+return;
 
-    });
+}
 
 
-    // GUARDAR
+const user =
+getUser();
 
-    saveUser(user);
 
+if(!user){
 
-    // LIMPAR CAMPO
+message.style.display="block";
 
-    input.value = "";
+message.textContent=
+"Não foi possível encontrar a conta.";
 
+return;
 
-    // ATUALIZAR PAINEL
+}
 
-    showDashboard(user);
 
+user.balance =
+Number(user.balance) + amount;
 
-    // MENSAGEM
 
-    const updatedMessage =
-      document.getElementById("addMessage");
+user.transactions.unshift({
 
-    updatedMessage.style.display =
-      "block";
+type:"Entrada",
 
-    updatedMessage.textContent =
-      "✅ Foram adicionados €" +
-      amount
-        .toFixed(2)
-        .replace(".", ",") +
-      " ao saldo fictício.";
+description:
+"Saldo fictício adicionado",
 
-  }
+amount:amount,
 
+date:
+new Date().toLocaleString("pt-PT")
 
-  // ==============================
-  // ENVIAR DINHEIRO
-  // ==============================
+});
 
-  function sendMoney() {
 
-    const email =
-      document
-        .getElementById("sendEmail")
-        .value
-        .trim();
+saveUser(user);
 
-    const amount =
-      Number(
-        document
-          .getElementById("sendAmount")
-          .value
-      );
 
-    const message =
-      document.getElementById("sendMessage");
+input.value="";
 
-    const user = getUser();
 
+showDashboard(user);
 
-    if (!user) {
 
-      message.style.display = "block";
+const updated =
+document
+.getElementById("addMessage");
 
-      message.textContent =
-        "Sessão não encontrada.";
 
-      return;
+updated.style.display="block";
 
-    }
+updated.textContent=
+"✅ Saldo adicionado com sucesso.";
 
+});
 
-    if (
-      !email ||
-      !Number.isFinite(amount) ||
-      amount <= 0
-    ) {
 
-      message.style.display = "block";
+/* =====================================
+   ENVIAR
+===================================== */
+
+document
+.getElementById("sendButton")
+.addEventListener("click",function(){
+
+const email =
+document
+.getElementById("sendEmail")
+.value
+.trim();
+
+
+const amount =
+Number(
+document
+.getElementById("sendAmount")
+.value
+);
+
+
+const message =
+document
+.getElementById("sendMessage");
+
+
+const user =
+getUser();
+
+
+if(!user){
+
+message.style.display="block";
+
+message.textContent=
+"Conta não encontrada.";
+
+return;
+
+}
+
+
+if(!email ||
+!Number.isFinite(amount) ||
+amount <= 0){
+
+message.style.display="block";
+
+message.textContent=
+"Preenche o email e o valor.";
+
+return;
+
+}
+
+
+if(amount > user.balance){
+
+message.style.display="block";
+
+message.textContent=
+"Saldo insuficiente.";
+
+return;
+
+}
+
+
+user.balance -= amount;
+
+
+user.transactions.unshift({
+
+type:"Saída",
+
+description:
+"Envio para " + email,
+
+amount:-amount,
+
+date:
+new Date().toLocaleString("pt-PT")
+
+});
+
+
+saveUser(user);
+
+
+document
+.getElementById("sendEmail")
+.value="";
+
+
+document
+.getElementById("sendAmount")
+.value="";
+
+
+showDashboard(user);
+
+
+const updated =
+document
+.getElementById("sendMessage");
+
+
+updated.style.display="block";
+
+updated.textContent=
+"✅ Envio registado.";
+
+});
+
+
+/* =====================================
+   HISTÓRICO
+===================================== */
+
+function displayTransactions(user){
+
+const container =
+document
+.getElementById("transactions");
+
+
+container.innerHTML="";
+
+
+if(!user.transactions ||
+user.transactions.length === 0){
+
+container.innerHTML=
+"<p style='margin-top:15px;color:#6b7280;'>" +
+"Nenhuma transação ainda." +
+"</p>";
+
+return;
+
+}
+
+
+user.transactions.forEach(function(transaction){
+
+const div =
+document.createElement("div");
+
+
+div.className="transaction";
+
+
+const amount =
+Number(transaction.amount);
+
+
+const amountText =
+(amount >= 0 ? "+" : "-") +
+"€" +
+Math.abs(amount)
+.toFixed(2)
+.replace(".",",");
+
+
+div.innerHTML=
+
+"<div class='transaction-title'>" +
+transaction.description +
+"</div>" +
+
+"<div class='" +
+(amount >= 0 ? "positive" : "negative") +
+"'>" +
+amountText +
+"</div>" +
+
+"<div class='transaction-date'>" +
+transaction.date +
+"</div>";
+
+
+container.appendChild(div);
+
+});
+
+}
+
+
+/* =====================================
+   COPIAR EMAIL
+===================================== */
+
+document
+.getElementById("copyButton")
+.addEventListener("click",function(){
+
+const user =
+getUser();
+
+
+if(!user){
+
+return;
+
+}
+
+
+if(navigator.clipboard){
+
+navigator.clipboard
+.writeText(user.email);
+
+}
+
+
+const message =
+document
+.getElementById("receiveMessage");
+
+
+message.style.display="block";
+
+message.textContent=
+"✅ Email copiado.";
+
+});
+
+
+/* =====================================
+   LOGOUT
+===================================== */
+
+document
+.getElementById("logoutButton")
+.addEventListener("click",function(){
+
+showPage(home);
+
+});
+
+
+/* =====================================
+   AO ABRIR
+===================================== */
+
+window.addEventListener("load",function(){
+
+const user =
+getUser();
+
+
+if(user){
+
+showDashboard(user);
+
+}else{
+
+showPage(home);
+
+}
+
+});
+
+</script>
+
+</body>
+</html>
 
      
