@@ -15,195 +15,656 @@
   font-family:Arial,sans-serif;
 }
 
+:root{
+  --dark:#111827;
+  --dark2:#1f2937;
+  --light:#f5f7fa;
+  --white:#ffffff;
+  --gray:#6b7280;
+  --border:#e5e7eb;
+  --green:#15803d;
+  --red:#b91c1c;
+}
+
 body{
-  background:#f5f7fa;
+  background:var(--light);
   color:#111827;
   min-height:100vh;
-}
-
-header{
-  background:#111827;
-  color:white;
-  text-align:center;
-  padding:24px 20px;
-}
-
-header h1{
-  font-size:30px;
-}
-
-header p{
-  margin-top:6px;
-  opacity:.8;
-}
-
-.container{
-  max-width:500px;
-  margin:auto;
-  padding:25px 20px;
-}
-
-.card{
-  background:white;
-  border-radius:20px;
-  padding:25px;
-  margin-bottom:20px;
-  box-shadow:0 4px 20px rgba(0,0,0,.08);
-}
-
-h2{
-  font-size:26px;
-}
-
-p{
-  line-height:1.5;
-}
-
-.balance{
-  font-size:42px;
-  font-weight:bold;
-  margin-top:12px;
-}
-
-.currency{
-  color:#6b7280;
-  margin-top:5px;
-}
-
-input{
-  width:100%;
-  padding:15px;
-  margin-top:12px;
-  border:1px solid #d1d5db;
-  border-radius:12px;
-  font-size:16px;
-  outline:none;
-}
-
-input:focus{
-  border-color:#111827;
+  padding-bottom:85px;
 }
 
 button{
-  width:100%;
-  padding:16px;
-  margin-top:12px;
   border:0;
-  border-radius:12px;
-  background:#111827;
-  color:white;
-  font-size:16px;
   cursor:pointer;
+  font-size:15px;
 }
 
-button:active{
-  transform:scale(.98);
-}
-
-.secondary{
-  background:#e5e7eb;
-  color:#111827;
-}
-
-.danger{
-  background:#b91c1c;
+input{
+  font-size:16px;
 }
 
 .hidden{
   display:none !important;
 }
 
-.message{
-  display:none;
-  margin-top:15px;
-  padding:12px;
-  background:#f3f4f6;
-  border-radius:10px;
+/* =========================
+   HEADER
+========================= */
+
+.top-header{
+  background:var(--dark);
+  color:white;
+  padding:18px 20px;
+  position:sticky;
+  top:0;
+  z-index:20;
 }
 
+.header-row{
+  max-width:600px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo{
+  font-size:22px;
+  font-weight:bold;
+}
+
+.header-actions{
+  display:flex;
+  gap:10px;
+}
+
+.icon-button{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  background:#374151;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
+}
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container{
+  max-width:600px;
+  margin:auto;
+  padding:20px 16px;
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.card{
+  background:white;
+  border-radius:20px;
+  padding:20px;
+  margin-bottom:16px;
+  box-shadow:0 4px 20px rgba(0,0,0,.06);
+}
+
+.card-title{
+  font-size:18px;
+  font-weight:bold;
+  margin-bottom:15px;
+}
+
+.small-text{
+  color:var(--gray);
+  font-size:14px;
+}
+
+.balance-label{
+  color:#d1d5db;
+  font-size:14px;
+}
+
+.balance{
+  font-size:36px;
+  font-weight:bold;
+  margin-top:8px;
+  letter-spacing:-1px;
+}
+
+.currency{
+  color:#d1d5db;
+  font-size:13px;
+  margin-top:5px;
+}
+
+/* =========================
+   BALANCE CARD
+========================= */
+
+.balance-card{
+  background:linear-gradient(135deg,#111827,#374151);
+  color:white;
+  border-radius:24px;
+  padding:25px;
+  margin-bottom:18px;
+  box-shadow:0 10px 30px rgba(17,24,39,.2);
+}
+
+.balance-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.demo-badge{
+  background:rgba(255,255,255,.12);
+  padding:7px 10px;
+  border-radius:20px;
+  font-size:11px;
+}
+
+/* =========================
+   QUICK ACTIONS
+========================= */
+
+.quick-actions{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin-bottom:18px;
+}
+
+.quick-action{
+  background:white;
+  border-radius:16px;
+  padding:14px 6px;
+  text-align:center;
+  box-shadow:0 4px 15px rgba(0,0,0,.05);
+  color:var(--dark);
+}
+
+.quick-icon{
+  width:42px;
+  height:42px;
+  margin:auto;
+  border-radius:13px;
+  background:#f3f4f6;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+}
+
+.quick-action span{
+  display:block;
+  font-size:12px;
+  margin-top:8px;
+  font-weight:bold;
+}
+
+/* =========================
+   INPUTS / BUTTONS
+========================= */
+
+input{
+  width:100%;
+  padding:15px;
+  margin-top:10px;
+  border:1px solid #d1d5db;
+  border-radius:12px;
+  outline:none;
+  background:white;
+}
+
+input:focus{
+  border-color:#111827;
+}
+
+.primary-button{
+  width:100%;
+  padding:15px;
+  margin-top:12px;
+  border-radius:12px;
+  background:var(--dark);
+  color:white;
+  font-weight:bold;
+}
+
+.secondary-button{
+  width:100%;
+  padding:15px;
+  margin-top:12px;
+  border-radius:12px;
+  background:#e5e7eb;
+  color:var(--dark);
+  font-weight:bold;
+}
+
+.danger-button{
+  width:100%;
+  padding:15px;
+  margin-top:12px;
+  border-radius:12px;
+  background:#fee2e2;
+  color:var(--red);
+  font-weight:bold;
+}
+
+.primary-button:active,
+.secondary-button:active,
+.danger-button:active,
+.quick-action:active,
+.icon-button:active{
+  transform:scale(.98);
+}
+
+/* =========================
+   MESSAGES
+========================= */
+
+.message{
+  display:none;
+  margin-top:12px;
+  padding:12px;
+  border-radius:10px;
+  background:#f3f4f6;
+  font-size:14px;
+}
+
+/* =========================
+   TRANSACTIONS
+========================= */
+
 .transaction{
-  padding:15px 0;
-  border-bottom:1px solid #e5e7eb;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:14px 0;
+  border-bottom:1px solid var(--border);
 }
 
 .transaction:last-child{
   border-bottom:0;
 }
 
+.transaction-icon{
+  width:42px;
+  height:42px;
+  border-radius:13px;
+  background:#f3f4f6;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.transaction-info{
+  flex:1;
+}
+
 .transaction-title{
   font-weight:bold;
+  font-size:14px;
 }
 
 .transaction-date{
-  color:#6b7280;
-  font-size:13px;
+  color:var(--gray);
+  font-size:12px;
   margin-top:4px;
+}
+
+.transaction-amount{
+  font-weight:bold;
+  font-size:14px;
 }
 
 .positive{
-  color:#15803d;
-  font-weight:bold;
-  margin-top:4px;
+  color:var(--green);
 }
 
 .negative{
-  color:#b91c1c;
+  color:var(--red);
+}
+
+/* =========================
+   VIRTUAL CARD
+========================= */
+
+.virtual-card{
+  background:linear-gradient(135deg,#111827,#4b5563);
+  color:white;
+  border-radius:22px;
+  padding:22px;
+  min-height:205px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  box-shadow:0 12px 25px rgba(0,0,0,.2);
+}
+
+.card-brand{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.card-chip{
+  width:38px;
+  height:28px;
+  border-radius:7px;
+  background:#d1d5db;
+}
+
+.card-number{
+  font-size:21px;
+  letter-spacing:3px;
+}
+
+.card-bottom{
+  display:flex;
+  justify-content:space-between;
+}
+
+.card-name{
+  font-size:12px;
+  text-transform:uppercase;
+}
+
+.card-expiry{
+  font-size:12px;
+}
+
+/* =========================
+   PROFILE
+========================= */
+
+.profile-head{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+.avatar{
+  width:62px;
+  height:62px;
+  border-radius:50%;
+  background:var(--dark);
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:23px;
   font-weight:bold;
+}
+
+.profile-info h2{
+  font-size:20px;
+}
+
+.profile-info p{
+  color:var(--gray);
   margin-top:4px;
+  font-size:14px;
+}
+
+.menu-item{
+  width:100%;
+  padding:17px 0;
+  background:white;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  color:var(--dark);
+  text-align:left;
+}
+
+.menu-item:last-child{
+  border-bottom:0;
+}
+
+.menu-left{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.menu-icon{
+  width:38px;
+  height:38px;
+  background:#f3f4f6;
+  border-radius:11px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* =========================
+   BOTTOM NAVIGATION
+========================= */
+
+.bottom-nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  height:72px;
+  background:white;
+  border-top:1px solid var(--border);
+  display:flex;
+  justify-content:center;
+  z-index:50;
+  box-shadow:0 -5px 20px rgba(0,0,0,.05);
+}
+
+.nav-inner{
+  width:100%;
+  max-width:600px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+}
+
+.nav-button{
+  background:white;
+  color:#9ca3af;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+  font-size:11px;
+}
+
+.nav-button .nav-icon{
+  font-size:21px;
+}
+
+.nav-button.active{
+  color:#111827;
+  font-weight:bold;
+}
+
+/* =========================
+   LOGIN / REGISTER
+========================= */
+
+.auth-container{
+  max-width:500px;
+  margin:auto;
+  padding:35px 20px;
+}
+
+.auth-logo{
+  text-align:center;
+  margin-bottom:25px;
+}
+
+.auth-logo h1{
+  font-size:32px;
+}
+
+.auth-logo p{
+  color:var(--gray);
+  margin-top:8px;
+}
+
+.auth-card{
+  background:white;
+  border-radius:22px;
+  padding:25px;
+  box-shadow:0 5px 25px rgba(0,0,0,.07);
+}
+
+.auth-card h2{
+  font-size:25px;
+  margin-bottom:10px;
+}
+
+.auth-card .intro{
+  color:var(--gray);
+  margin-bottom:15px;
+}
+
+/* =========================
+   HOME
+========================= */
+
+.home-hero{
+  text-align:center;
+  padding:25px 5px;
+}
+
+.home-hero h2{
+  font-size:30px;
+  margin-bottom:10px;
+}
+
+.home-hero p{
+  color:var(--gray);
+  line-height:1.5;
+}
+
+.feature{
+  display:flex;
+  align-items:center;
+  gap:13px;
+  margin-top:17px;
+}
+
+.feature-icon{
+  width:45px;
+  height:45px;
+  background:#f3f4f6;
+  border-radius:13px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:21px;
+}
+
+.feature-text strong{
+  display:block;
+  font-size:15px;
+}
+
+.feature-text span{
+  color:var(--gray);
+  font-size:13px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:380px){
+
+.quick-actions{
+  grid-template-columns:repeat(2,1fr);
+}
+
+.balance{
+  font-size:32px;
+}
+
+}
+
+/* =========================
+   FOOTER NOTICE
+========================= */
+
+.demo-notice{
+  text-align:center;
+  color:#6b7280;
+  font-size:11px;
+  line-height:1.5;
+  padding:10px 20px 25px;
 }
 
 </style>
 </head>
 
-
 <body>
 
-<header>
+<!-- =====================================================
+     AUTH / HOME
+===================================================== -->
 
-<h1>Triple Bank</h1>
+<section id="authArea">
 
-<p>O teu banco digital</p>
-
+<header class="top-header">
+  <div class="header-row">
+    <div class="logo">Triple Bank</div>
+  </div>
 </header>
 
-
-<div class="container">
-
-
-<!-- HOME -->
+<div class="auth-container">
 
 <section id="home">
 
-<div class="card">
+<div class="home-hero">
 
-<p>Saldo disponível</p>
+<h2>O teu dinheiro, mais simples.</h2>
 
-<div class="balance">
-€0,00
-</div>
-
-<div class="currency">
-EUR
-</div>
-
-</div>
-
-
-<div class="card">
-
-<h2>Bem-vindo ao Triple Bank</h2>
-
-<p style="margin-top:10px;">
-A tua plataforma financeira digital.
+<p>
+Uma plataforma digital moderna para gerir a tua experiência financeira.
 </p>
 
+</div>
 
-<button id="loginButton">
+<div class="card">
+
+<div class="feature">
+<div class="feature-icon">💰</div>
+<div class="feature-text">
+<strong>Gestão de saldo</strong>
+<span>Acompanha o teu saldo num só lugar.</span>
+</div>
+</div>
+
+<div class="feature">
+<div class="feature-icon">📊</div>
+<div class="feature-text">
+<strong>Movimentos</strong>
+<span>Consulta o histórico da tua conta.</span>
+</div>
+</div>
+
+<div class="feature">
+<div class="feature-icon">🔐</div>
+<div class="feature-text">
+<strong>Conta pessoal</strong>
+<span>Uma área privada para cada utilizador.</span>
+</div>
+</div>
+
+<button id="loginButton" class="primary-button">
 Entrar na conta
 </button>
 
-
-<button id="registerButton" class="secondary">
+<button id="registerButton" class="secondary-button">
 Criar conta
 </button>
 
@@ -212,15 +673,17 @@ Criar conta
 </section>
 
 
-
 <!-- REGISTO -->
 
 <section id="register" class="hidden">
 
-<div class="card">
+<div class="auth-card">
 
 <h2>Criar conta</h2>
 
+<p class="intro">
+Cria a tua conta de demonstração.
+</p>
 
 <input
 id="registerName"
@@ -228,13 +691,11 @@ type="text"
 placeholder="Nome"
 >
 
-
 <input
 id="registerEmail"
 type="email"
 placeholder="Email"
 >
-
 
 <input
 id="registerPassword"
@@ -242,23 +703,19 @@ type="password"
 placeholder="Palavra-passe"
 >
 
-
 <input
 id="registerConfirm"
 type="password"
 placeholder="Confirmar palavra-passe"
 >
 
-
-<button id="createAccountButton">
+<button id="createAccountButton" class="primary-button">
 Criar conta
 </button>
 
-
-<button id="backFromRegister" class="secondary">
+<button id="backFromRegister" class="secondary-button">
 Voltar
 </button>
-
 
 <div id="registerMessage" class="message"></div>
 
@@ -267,15 +724,17 @@ Voltar
 </section>
 
 
-
 <!-- LOGIN -->
 
 <section id="login" class="hidden">
 
-<div class="card">
+<div class="auth-card">
 
-<h2>Entrar na conta</h2>
+<h2>Bem-vindo de volta</h2>
 
+<p class="intro">
+Entra na tua conta Triple Bank.
+</p>
 
 <input
 id="loginEmail"
@@ -283,23 +742,19 @@ type="email"
 placeholder="Email"
 >
 
-
 <input
 id="loginPassword"
 type="password"
 placeholder="Palavra-passe"
 >
 
-
-<button id="enterButton">
+<button id="enterButton" class="primary-button">
 Entrar
 </button>
 
-
-<button id="backFromLogin" class="secondary">
+<button id="backFromLogin" class="secondary-button">
 Voltar
 </button>
-
 
 <div id="loginMessage" class="message"></div>
 
@@ -307,44 +762,182 @@ Voltar
 
 </section>
 
+</div>
+
+<div class="demo-notice">
+Triple Bank — versão de demonstração. As funcionalidades financeiras apresentadas não movimentam dinheiro real.
+</div>
+
+</section>
 
 
-<!-- DASHBOARD -->
+<!-- =====================================================
+     APP
+===================================================== -->
 
-<section id="dashboard" class="hidden">
+<section id="appArea" class="hidden">
+
+<header class="top-header">
+
+<div class="header-row">
+
+<div class="logo">
+Triple Bank
+</div>
+
+<div class="header-actions">
+
+<button class="icon-button" id="notificationButton">
+🔔
+</button>
+
+<button class="icon-button" id="headerProfileButton">
+👤
+</button>
+
+</div>
+
+</div>
+
+</header>
 
 
-<div class="card">
-
-<h2>
-Olá, <span id="userName"></span> 👋
-</h2>
+<div class="container">
 
 
-<p style="margin-top:20px;">
+<!-- ================= INÍCIO ================= -->
+
+<section id="pageHome">
+
+<div class="balance-card">
+
+<div class="balance-top">
+
+<div>
+<div class="balance-label">
 Saldo disponível
-</p>
-
+</div>
 
 <div class="balance">
 €<span id="userBalance">0,00</span>
 </div>
 
-
 <div class="currency">
 EUR
 </div>
+</div>
+
+<div class="demo-badge">
+DEMO
+</div>
+
+</div>
 
 </div>
 
 
+<!-- AÇÕES RÁPIDAS -->
 
-<!-- ADICIONAR -->
+<div class="quick-actions">
+
+<button class="quick-action" id="quickAdd">
+
+<div class="quick-icon">
+➕
+</div>
+
+<span>Adicionar</span>
+
+</button>
+
+
+<button class="quick-action" id="quickSend">
+
+<div class="quick-icon">
+↗️
+</div>
+
+<span>Enviar</span>
+
+</button>
+
+
+<button class="quick-action" id="quickCard">
+
+<div class="quick-icon">
+💳
+</div>
+
+<span>Cartão</span>
+
+</button>
+
+
+<button class="quick-action" id="quickHistory">
+
+<div class="quick-icon">
+📊
+</div>
+
+<span>Movimentos</span>
+
+</button>
+
+</div>
+
 
 <div class="card">
 
-<h2>Adicionar saldo</h2>
+<div class="card-title">
+Olá, <span id="userName"></span> 👋
+</div>
 
+<p class="small-text">
+Bem-vindo ao teu espaço Triple Bank.
+</p>
+
+</div>
+
+
+<!-- ÚLTIMOS MOVIMENTOS -->
+
+<div class="card">
+
+<div style="display:flex;justify-content:space-between;align-items:center;">
+
+<div class="card-title" style="margin-bottom:0;">
+Últimos movimentos
+</div>
+
+<button
+id="viewAllTransactions"
+style="background:none;color:#111827;font-size:13px;"
+>
+Ver todos
+</button>
+
+</div>
+
+<div id="homeTransactions" style="margin-top:10px;"></div>
+
+</div>
+
+</section>
+
+
+<!-- ================= ADICIONAR ================= -->
+
+<section id="pageAdd" class="hidden">
+
+<div class="card">
+
+<div class="card-title">
+Adicionar saldo
+</div>
+
+<p class="small-text">
+Esta operação é apenas para demonstração.
+</p>
 
 <input
 id="addAmount"
@@ -354,31 +947,36 @@ step="0.01"
 placeholder="Valor em €"
 >
 
-
-<button id="addButton">
+<button id="addButton" class="primary-button">
 💰 Adicionar saldo fictício
 </button>
-
 
 <div id="addMessage" class="message"></div>
 
 </div>
 
+</section>
 
 
-<!-- ENVIAR -->
+<!-- ================= ENVIAR ================= -->
+
+<section id="pageSend" class="hidden">
 
 <div class="card">
 
-<h2>Enviar</h2>
+<div class="card-title">
+Enviar saldo
+</div>
 
+<p class="small-text">
+Registo demonstrativo de um envio entre utilizadores.
+</p>
 
 <input
 id="sendEmail"
 type="email"
 placeholder="Email do destinatário"
 >
-
 
 <input
 id="sendAmount"
@@ -388,765 +986,473 @@ step="0.01"
 placeholder="Valor em €"
 >
 
-
-<button id="sendButton">
+<button id="sendButton" class="primary-button">
 💸 Enviar saldo
 </button>
-
 
 <div id="sendMessage" class="message"></div>
 
 </div>
 
+</section>
 
 
-<!-- RECEBER -->
+<!-- ================= MOVIMENTOS ================= -->
+
+<section id="pageTransactions" class="hidden">
 
 <div class="card">
 
-<h2>Receber</h2>
-
-
-<p style="margin-top:10px;">
-O teu email:
-</p>
-
-
-<p
-id="receiveEmail"
-style="font-weight:bold;margin-top:8px;"
-></p>
-
-
-<button id="copyButton">
-📥 Copiar email
-</button>
-
-
-<div id="receiveMessage" class="message"></div>
-
+<div class="card-title">
+Movimentos
 </div>
-
-
-
-<!-- HISTÓRICO -->
-
-<div class="card">
-
-<h2>Histórico</h2>
-
 
 <div id="transactions"></div>
 
 </div>
 
+</section>
 
 
-<!-- LOGOUT -->
+<!-- ================= CARTÃO ================= -->
+
+<section id="pageCard" class="hidden">
 
 <div class="card">
 
-<button id="logoutButton" class="danger">
-Terminar sessão
+<div class="card-title">
+Cartão virtual
+</div>
+
+<p class="small-text" style="margin-bottom:18px;">
+Pré-visualização do cartão Triple Bank.
+</p>
+
+<div class="virtual-card">
+
+<div class="card-brand">
+
+<strong>TRIPLE BANK</strong>
+
+<div class="card-chip"></div>
+
+</div>
+
+<div class="card-number">
+•••• •••• •••• 4821
+</div>
+
+<div class="card-bottom">
+
+<div>
+<div class="card-name" id="cardUserName">
+UTILIZADOR
+</div>
+</div>
+
+<div class="card-expiry">
+12/30
+</div>
+
+</div>
+
+</div>
+
+<p class="small-text" style="margin-top:15px;">
+Este cartão é apenas visual e não permite pagamentos reais.
+</p>
+
+</div>
+
+</section>
+
+
+<!-- ================= PERFIL ================= -->
+
+<section id="pageProfile" class="hidden">
+
+<div class="card">
+
+<div class="profile-head">
+
+<div class="avatar" id="profileAvatar">
+U
+</div>
+
+<div class="profile-info">
+
+<h2 id="profileName">
+Utilizador
+</h2>
+
+<p id="profileEmail">
+email@example.com
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<button class="menu-item" id="settingsButton">
+
+<div class="menu-left">
+
+<div class="menu-icon">
+⚙️
+</div>
+
+<span>Definições</span>
+
+</div>
+
+<span>›</span>
+
+</button>
+
+
+<button class="menu-item" id="helpButton">
+
+<div class="menu-left">
+
+<div class="menu-icon">
+🆘
+</div>
+
+<span>Ajuda e suporte</span>
+
+</div>
+
+<span>›</span>
+
+</button>
+
+
+<button class="menu-item" id="statementButton">
+
+<div class="menu-left">
+
+<div class="menu-icon">
+📄
+</div>
+
+<span>Extrato</span>
+
+</div>
+
+<span>›</span>
+
 </button>
 
 </div>
 
 
+<div class="card">
+
+<button id="logoutButton" class="danger-button">
+Terminar sessão
+</button>
+
+</div>
+
 </section>
+
+
+<!-- ================= DEFINIÇÕES ================= -->
+
+<section id="pageSettings" class="hidden">
+
+<div class="card">
+
+<div class="card-title">
+Definições
+</div>
+
+<button class="menu-item" id="settingsNotifications">
+
+<div class="menu-left">
+
+<div class="menu-icon">
+🔔
+</div>
+
+<span>Notificações</span>
+
+</div>
+
+<span>Ativas</span>
+
+</button>
+
+
+<button class="menu-item" id="settingsSecurity">
+
+<div class="menu-left">
+
+<div class="menu-icon">
+🔐
+</div>
+
+<span>Segurança</span>
+
+</div>
+
+<span>›</span>
+
+</button>
+
+
+<button class="menu-item" id="settingsLanguage">
+
+<div class="menu-left">
+
+<div class="menu-icon">
+🌐
+</div>
+
+<span>Idioma</span>
+
+</div>
+
+<span>PT</span>
+
+</button>
 
 </div>
 
 
+<div class="card">
+
+<p class="small-text">
+A versão atual é uma demonstração. As funcionalidades financeiras reais serão adicionadas apenas quando a infraestrutura legal e técnica estiver preparada.
+</p>
+
+</div>
+
+</section>
+
+
+<!-- ================= AJUDA ================= -->
+
+<section id="pageHelp" class="hidden">
+
+<div class="card">
+
+<div class="card-title">
+Ajuda e suporte
+</div>
+
+<p class="small-text">
+Precisas de ajuda? Nesta versão podes consultar as informações básicas da plataforma.
+</p>
+
+<button class="primary-button" id="faqButton">
+❓ Perguntas frequentes
+</button>
+
+<button class="secondary-button" id="contactButton">
+✉️ Contactar Triple Bank
+</button>
+
+<div id="helpMessage" class="message"></div>
+
+</div>
+
+</section>
+
+
+<!-- ================= EXTRATO ================= -->
+
+<section id="pageStatement" class="hidden">
+
+<div class="card">
+
+<div class="card-title">
+Extrato da conta
+</div>
+
+<p class="small-text">
+Resumo dos movimentos registados nesta demonstração.
+</p>
+
+<div id="statementContent" style="margin-top:15px;"></div>
+
+</div>
+
+</section>
+
+
+</div>
+
+
+<div class="demo-notice">
+Triple Bank — versão de demonstração. Não são realizados depósitos, pagamentos ou transferências reais.
+</div>
+
+
+<!-- ================= BOTTOM NAV ================= -->
+
+<nav class="bottom-nav">
+
+<div class="nav-inner">
+
+<button class="nav-button active" id="navHome">
+
+<div class="nav-icon">
+⌂
+</div>
+
+<span>Início</span>
+
+</button>
+
+
+<button class="nav-button" id="navTransactions">
+
+<div class="nav-icon">
+↔
+</div>
+
+<span>Movimentos</span>
+
+</button>
+
+
+<button class="nav-button" id="navCard">
+
+<div class="nav-icon">
+▣
+</div>
+
+<span>Cartão</span>
+
+</button>
+
+
+<button class="nav-button" id="navProfile">
+
+<div class="nav-icon">
+●
+</div>
+
+<span>Perfil</span>
+
+</button>
+
+</div>
+
+</nav>
+
+</section>
+
 
 <script>
 
-/* =====================================
-   SISTEMA DE NAVEGAÇÃO
-===================================== */
+/* =====================================================
+   SISTEMA PRINCIPAL
+===================================================== */
 
-const home =
-document.getElementById("home");
+const authArea = document.getElementById("authArea");
+const appArea = document.getElementById("appArea");
 
-const register =
-document.getElementById("register");
+const home = document.getElementById("home");
+const register = document.getElementById("register");
+const login = document.getElementById("login");
 
-const login =
-document.getElementById("login");
+const pages = {
 
-const dashboard =
-document.getElementById("dashboard");
+home: document.getElementById("pageHome"),
+add: document.getElementById("pageAdd"),
+send: document.getElementById("pageSend"),
+transactions: document.getElementById("pageTransactions"),
+card: document.getElementById("pageCard"),
+profile: document.getElementById("pageProfile"),
+settings: document.getElementById("pageSettings"),
+help: document.getElementById("pageHelp"),
+statement: document.getElementById("pageStatement")
+
+};
 
 
-function showPage(page){
+/* =====================================================
+   MOSTRAR PÁGINA DE AUTENTICAÇÃO
+===================================================== */
+
+function showAuthPage(page){
 
 home.classList.add("hidden");
-
 register.classList.add("hidden");
-
 login.classList.add("hidden");
-
-dashboard.classList.add("hidden");
 
 page.classList.remove("hidden");
 
 }
 
 
-/* =====================================
-   BOTÕES DE NAVEGAÇÃO
-===================================== */
+/* =====================================================
+   MOSTRAR PÁGINA DA APP
+===================================================== */
 
-document
-.getElementById("loginButton")
-.addEventListener("click",function(){
+function showAppPage(pageName){
 
-showPage(login);
+Object.values(pages).forEach(function(page){
+
+page.classList.add("hidden");
+
+});
+
+pages[pageName].classList.remove("hidden");
+
+updateBottomNavigation(pageName);
+
+}
+
+
+/* =====================================================
+   NAVEGAÇÃO INFERIOR
+===================================================== */
+
+function updateBottomNavigation(pageName){
+
+document.querySelectorAll(".nav-button").forEach(function(button){
+
+button.classList.remove("active");
 
 });
 
 
-document
-.getElementById("registerButton")
-.addEventListener("click",function(){
-
-showPage(register);
-
-});
-
+if(pageName === "home"){
 
 document
-.getElementById("backFromRegister")
-.addEventListener("click",function(){
-
-showPage(home);
-
-});
-
-
-document
-.getElementById("backFromLogin")
-.addEventListener("click",function(){
-
-showPage(home);
-
-});
-
-
-/* =====================================
-   UTILIZADOR
-===================================== */
-
-function getUser(){
-
-const saved =
-localStorage.getItem("tripleBankUser");
-
-if(!saved){
-
-return null;
+.getElementById("navHome")
+.classList.add("active");
 
 }
 
-try{
+if(pageName === "transactions"){
 
-const user =
-JSON.parse(saved);
-
-
-if(typeof user.balance !== "number"){
-
-user.balance =
-Number(user.balance) || 0;
+document
+.getElementById("navTransactions")
+.classList.add("active");
 
 }
 
+if(pageName === "card"){
 
-if(!Array.isArray(user.transactions)){
-
-user.transactions = [];
+document
+.getElementById("navCard")
+.classList.add("active");
 
 }
 
-
-return user;
-
-}catch(error){
-
-console.log(error);
-
-localStorage.removeItem("tripleBankUser");
-
-return null;
-
-}
-
-}
-
-
-function saveUser(user){
-
-localStorage.setItem(
-"tripleBankUser",
-JSON.stringify(user)
-);
-
-}
-
-
-/* =====================================
-   REGISTAR CONTA
-===================================== */
+if(pageName === "profile" ||
+pageName === "settings" ||
+pageName === "help" ||
+pageName === "statement"){
 
 document
-.getElementById("createAccountButton")
-.addEventListener("click",function(){
-
-const name =
-document
-.getElementById("registerName")
-.value
-.trim();
-
-
-const email =
-document
-.getElementById("registerEmail")
-.value
-.trim();
-
-
-const password =
-document
-.getElementById("registerPassword")
-.value;
-
-
-const confirm =
-document
-.getElementById("registerConfirm")
-.value;
-
-
-const message =
-document
-.getElementById("registerMessage");
-
-
-if(!name ||
-!email ||
-!password ||
-!confirm){
-
-message.style.display="block";
-
-message.textContent=
-"Preenche todos os campos.";
-
-return;
-
-}
-
-
-if(password !== confirm){
-
-message.style.display="block";
-
-message.textContent=
-"As palavras-passe não coincidem.";
-
-return;
-
-}
-
-
-if(password.length < 6){
-
-message.style.display="block";
-
-message.textContent=
-"A palavra-passe deve ter pelo menos 6 caracteres.";
-
-return;
-
-}
-
-
-const user={
-
-name:name,
-
-email:email,
-
-password:password,
-
-balance:0,
-
-transactions:[]
-
-};
-
-
-saveUser(user);
-
-showDashboard(user);
-
-});
-
-
-/* =====================================
-   LOGIN
-===================================== */
-
-document
-.getElementById("enterButton")
-.addEventListener("click",function(){
-
-const email =
-document
-.getElementById("loginEmail")
-.value
-.trim();
-
-
-const password =
-document
-.getElementById("loginPassword")
-.value;
-
-
-const message =
-document
-.getElementById("loginMessage");
-
-
-const user =
-getUser();
-
-
-if(!user){
-
-message.style.display="block";
-
-message.textContent=
-"Nenhuma conta encontrada neste dispositivo.";
-
-return;
-
-}
-
-
-if(
-email !== user.email ||
-password !== user.password
-){
-
-message.style.display="block";
-
-message.textContent=
-"Email ou palavra-passe incorretos.";
-
-return;
-
-}
-
-
-showDashboard(user);
-
-});
-
-
-/* =====================================
-   MOSTRAR DASHBOARD
-===================================== */
-
-function showDashboard(user){
-
-showPage(dashboard);
-
-
-document
-.getElementById("userName")
-.textContent=user.name;
-
-
-document
-.getElementById("userBalance")
-.textContent=
-Number(user.balance)
-.toFixed(2)
-.replace(".",",");
-
-
-document
-.getElementById("receiveEmail")
-.textContent=user.email;
-
-
-displayTransactions(user);
-
-}
-
-
-/* =====================================
-   ADICIONAR SALDO
-===================================== */
-
-document
-.getElementById("addButton")
-.addEventListener("click",function(){
-
-const input =
-document
-.getElementById("addAmount");
-
-
-const amount =
-Number(input.value);
-
-
-const message =
-document
-.getElementById("addMessage");
-
-
-if(!Number.isFinite(amount) ||
-amount <= 0){
-
-message.style.display="block";
-
-message.textContent=
-"Introduz um valor válido.";
-
-return;
-
-}
-
-
-const user =
-getUser();
-
-
-if(!user){
-
-message.style.display="block";
-
-message.textContent=
-"Não foi possível encontrar a conta.";
-
-return;
-
-}
-
-
-user.balance =
-Number(user.balance) + amount;
-
-
-user.transactions.unshift({
-
-type:"Entrada",
-
-description:
-"Saldo fictício adicionado",
-
-amount:amount,
-
-date:
-new Date().toLocaleString("pt-PT")
-
-});
-
-
-saveUser(user);
-
-
-input.value="";
-
-
-showDashboard(user);
-
-
-const updated =
-document
-.getElementById("addMessage");
-
-
-updated.style.display="block";
-
-updated.textContent=
-"✅ Saldo adicionado com sucesso.";
-
-});
-
-
-/* =====================================
-   ENVIAR
-===================================== */
-
-document
-.getElementById("sendButton")
-.addEventListener("click",function(){
-
-const email =
-document
-.getElementById("sendEmail")
-.value
-.trim();
-
-
-const amount =
-Number(
-document
-.getElementById("sendAmount")
-.value
-);
-
-
-const message =
-document
-.getElementById("sendMessage");
-
-
-const user =
-getUser();
-
-
-if(!user){
-
-message.style.display="block";
-
-message.textContent=
-"Conta não encontrada.";
-
-return;
-
-}
-
-
-if(!email ||
-!Number.isFinite(amount) ||
-amount <= 0){
-
-message.style.display="block";
-
-message.textContent=
-"Preenche o email e o valor.";
-
-return;
-
-}
-
-
-if(amount > user.balance){
-
-message.style.display="block";
-
-message.textContent=
-"Saldo insuficiente.";
-
-return;
-
-}
-
-
-user.balance -= amount;
-
-
-user.transactions.unshift({
-
-type:"Saída",
-
-description:
-"Envio para " + email,
-
-amount:-amount,
-
-date:
-new Date().toLocaleString("pt-PT")
-
-});
-
-
-saveUser(user);
-
-
-document
-.getElementById("sendEmail")
-.value="";
-
-
-document
-.getElementById("sendAmount")
-.value="";
-
-
-showDashboard(user);
-
-
-const updated =
-document
-.getElementById("sendMessage");
-
-
-updated.style.display="block";
-
-updated.textContent=
-"✅ Envio registado.";
-
-});
-
-
-/* =====================================
-   HISTÓRICO
-===================================== */
-
-function displayTransactions(user){
-
-const container =
-document
-.getElementById("transactions");
-
-
-container.innerHTML="";
-
-
-if(!user.transactions ||
-user.transactions.length === 0){
-
-container.innerHTML=
-"<p style='margin-top:15px;color:#6b7280;'>" +
-"Nenhuma transação ainda." +
-"</p>";
-
-return;
-
-}
-
-
-user.transactions.forEach(function(transaction){
-
-const div =
-document.createElement("div");
-
-
-div.className="transaction";
-
-
-const amount =
-Number(transaction.amount);
-
-
-const amountText =
-(amount >= 0 ? "+" : "-") +
-"€" +
-Math.abs(amount)
-.toFixed(2)
-.replace(".",",");
-
-
-div.innerHTML=
-
-"<div class='transaction-title'>" +
-transaction.description +
-"</div>" +
-
-"<div class='" +
-(amount >= 0 ? "positive" : "negative") +
-"'>" +
-amountText +
-"</div>" +
-
-"<div class='transaction-date'>" +
-transaction.date +
-"</div>";
-
-
-container.appendChild(div);
-
-});
-
-}
-
-
-/* =====================================
-   COPIAR EMAIL
-===================================== */
-
-document
-.getElementById("copyButton")
-.addEventListener("click",function(){
-
-const user =
-getUser();
-
-
-if(!user){
-
-return;
-
-}
-
-
-if(navigator.clipboard){
-
-navigator.clipboard
-.writeText(user.email);
-
-}
-
-
-const message =
-document
-.getElementById("receiveMessage");
-
-
-message.style.display="block";
-
-message.textContent=
-"✅ Email copiado.";
-
-});
-
-
-/* =====================================
-   LOGOUT
-===================================== */
-
-document
-.getElementById("logoutButton")
-.addEventListener("click",function(){
-
-showPage(home);
-
-});
-
-
-/* =====================================
-   AO ABRIR
-===================================== */
-
-window.addEventListener("load",function(){
-
-const user =
-getUser();
-
-
-if(user){
-
-showDashboard(user);
-
-}else{
-
-showPage(home);
-
-}
-
-});
-
-</script>
-
-</body>
-</html>
-
-     
+.get
