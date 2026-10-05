@@ -4,2250 +4,761 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Triple Bank</title>
-
 <style>
-:root{
-    --dark:#111827;
-    --dark2:#1f2937;
-    --bg:#f5f7fa;
-    --card:#ffffff;
-    --text:#111827;
-    --muted:#6b7280;
-    --border:#e5e7eb;
-    --green:#16a34a;
-    --red:#dc2626;
-    --blue:#2563eb;
-    --shadow:0 10px 30px rgba(17,24,39,.08);
-}
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-body{
-    font-family:Arial,Helvetica,sans-serif;
-    background:var(--bg);
-    color:var(--text);
-    min-height:100vh;
-}
-
-button,
-input{
-    font:inherit;
-}
-
-button{
-    cursor:pointer;
-}
-
-.hidden{
-    display:none !important;
-}
-
-/* HEADER */
-
-.topbar{
-    height:70px;
-    background:var(--dark);
-    color:white;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 20px;
-    position:sticky;
-    top:0;
-    z-index:50;
-}
-
-.logo{
-    font-size:24px;
-    font-weight:800;
-    letter-spacing:-.5px;
-}
-
-.top-actions{
-    display:flex;
-    gap:8px;
-}
-
-.icon-btn{
-    width:42px;
-    height:42px;
-    border:0;
-    border-radius:50%;
-    background:rgba(255,255,255,.1);
-    color:white;
-    font-size:19px;
-}
-
-/* GENERAL */
-
-.container{
-    width:100%;
-    max-width:520px;
-    margin:0 auto;
-    padding:24px 18px 110px;
-}
-
-.page{
-    display:none;
-}
-
-.page.active{
-    display:block;
-}
-
-/* HOME */
-
-.hero{
-    text-align:center;
-    padding:42px 8px 25px;
-}
-
-.hero h1{
-    font-size:38px;
-    line-height:1.08;
-    letter-spacing:-1.5px;
-    margin-bottom:16px;
-}
-
-.hero p{
-    color:var(--muted);
-    font-size:18px;
-    line-height:1.5;
-}
-
-.home-card{
-    background:white;
-    border-radius:26px;
-    padding:26px 22px;
-    box-shadow:var(--shadow);
-}
-
-.feature{
-    display:flex;
-    align-items:center;
-    gap:16px;
-    margin-bottom:22px;
-}
-
-.feature:last-of-type{
-    margin-bottom:28px;
-}
-
-.feature-icon{
-    width:58px;
-    height:58px;
-    border-radius:18px;
-    background:#f1f3f5;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:28px;
-    flex-shrink:0;
-}
-
-.feature h3{
-    font-size:19px;
-    margin-bottom:4px;
-}
-
-.feature p{
-    color:var(--muted);
-    font-size:15px;
-    line-height:1.4;
-}
-
-.main-btn{
-    width:100%;
-    border:0;
-    border-radius:16px;
-    padding:17px;
-    background:var(--dark);
-    color:white;
-    font-weight:700;
-    font-size:17px;
-    margin-top:10px;
-}
-
-.secondary-btn{
-    width:100%;
-    border:0;
-    border-radius:16px;
-    padding:17px;
-    background:#e5e7eb;
-    color:var(--dark);
-    font-weight:700;
-    font-size:17px;
-    margin-top:10px;
-}
-
-.outline-btn{
-    width:100%;
-    border:1px solid var(--border);
-    border-radius:14px;
-    padding:14px;
-    background:white;
-    color:var(--dark);
-    font-weight:700;
-    margin-top:10px;
-}
-
-.demo-note{
-    text-align:center;
-    color:var(--muted);
-    font-size:13px;
-    line-height:1.5;
-    padding:25px 10px;
-}
-
-/* AUTH */
-
-.auth-card{
-    background:white;
-    border-radius:24px;
-    padding:26px 22px;
-    box-shadow:var(--shadow);
-    margin-top:25px;
-}
-
-.auth-card h2{
-    font-size:28px;
-    margin-bottom:8px;
-}
-
-.auth-card .subtitle{
-    color:var(--muted);
-    margin-bottom:25px;
-}
-
-.field{
-    margin-bottom:17px;
-}
-
-.field label{
-    display:block;
-    font-size:14px;
-    font-weight:700;
-    margin-bottom:7px;
-}
-
-.field input{
-    width:100%;
-    border:1px solid #d1d5db;
-    border-radius:13px;
-    padding:14px;
-    outline:none;
-    background:white;
-}
-
-.field input:focus{
-    border-color:var(--blue);
-    box-shadow:0 0 0 3px rgba(37,99,235,.1);
-}
-
-.back-btn{
-    border:0;
-    background:none;
-    color:var(--muted);
-    margin-bottom:20px;
-    font-weight:600;
-}
-
-/* DASHBOARD */
-
-.greeting{
-    margin-bottom:20px;
-}
-
-.greeting h2{
-    font-size:26px;
-    margin-bottom:5px;
-}
-
-.greeting p{
-    color:var(--muted);
-}
-
-.balance-card{
-    background:var(--dark);
-    color:white;
-    border-radius:24px;
-    padding:25px;
-    box-shadow:var(--shadow);
-}
-
-.balance-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:20px;
-}
-
-.demo-badge{
-    background:rgba(255,255,255,.13);
-    padding:6px 10px;
-    border-radius:20px;
-    font-size:11px;
-    font-weight:700;
-}
-
-.balance-label{
-    color:#cbd5e1;
-    font-size:14px;
-}
-
-.balance-value{
-    font-size:38px;
-    font-weight:800;
-    margin-top:6px;
-}
-
-.quick-actions{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:10px;
-    margin:18px 0 25px;
-}
-
-.quick-btn{
-    border:0;
-    background:white;
-    border-radius:17px;
-    padding:14px 5px;
-    box-shadow:0 5px 18px rgba(0,0,0,.06);
-    color:var(--dark);
-    font-weight:700;
-    font-size:12px;
-}
-
-.quick-btn span{
-    display:block;
-    font-size:23px;
-    margin-bottom:7px;
-}
-
-/* SECTIONS */
-
-.section-title{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin:24px 0 12px;
-}
-
-.section-title h3{
-    font-size:19px;
-}
-
-.link-btn{
-    border:0;
-    background:none;
-    color:var(--blue);
-    font-weight:700;
-}
-
-.list{
-    background:white;
-    border-radius:20px;
-    overflow:hidden;
-    box-shadow:0 5px 20px rgba(0,0,0,.04);
-}
-
-.transaction{
-    display:flex;
-    align-items:center;
-    gap:13px;
-    padding:16px;
-    border-bottom:1px solid var(--border);
-}
-
-.transaction:last-child{
-    border-bottom:0;
-}
-
-.tx-icon{
-    width:44px;
-    height:44px;
-    border-radius:14px;
-    background:#f1f5f9;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:20px;
-}
-
-.tx-info{
-    flex:1;
-}
-
-.tx-info strong{
-    display:block;
-    font-size:15px;
-    margin-bottom:4px;
-}
-
-.tx-info small{
-    color:var(--muted);
-}
-
-.tx-value{
-    font-weight:800;
-}
-
-.positive{
-    color:var(--green);
-}
-
-.negative{
-    color:var(--red);
-}
-
-.empty{
-    padding:25px;
-    text-align:center;
-    color:var(--muted);
-}
-
-/* CARD */
-
-.virtual-card{
-    min-height:220px;
-    border-radius:25px;
-    padding:25px;
-    background:linear-gradient(135deg,#111827,#374151);
-    color:white;
-    position:relative;
-    overflow:hidden;
-    box-shadow:var(--shadow);
-}
-
-.virtual-card:after{
-    content:"";
-    position:absolute;
-    width:220px;
-    height:220px;
-    border-radius:50%;
-    background:rgba(255,255,255,.05);
-    right:-80px;
-    bottom:-80px;
-}
-
-.card-brand{
-    font-size:21px;
-    font-weight:800;
-}
-
-.card-chip{
-    margin-top:40px;
-    font-size:30px;
-}
-
-.card-number{
-    font-size:20px;
-    letter-spacing:2px;
-    margin-top:22px;
-}
-
-.card-bottom{
-    display:flex;
-    justify-content:space-between;
-    margin-top:18px;
-    font-size:12px;
-    color:#d1d5db;
-}
-
-/* PROFILE */
-
-.profile-card{
-    background:white;
-    border-radius:22px;
-    padding:22px;
-    box-shadow:var(--shadow);
-}
-
-.avatar{
-    width:70px;
-    height:70px;
-    border-radius:50%;
-    background:var(--dark);
-    color:white;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:25px;
-    font-weight:800;
-    margin-bottom:14px;
-}
-
-.profile-card h2{
-    margin-bottom:5px;
-}
-
-.profile-card p{
-    color:var(--muted);
-}
-
-.menu-list{
-    background:white;
-    border-radius:20px;
-    overflow:hidden;
-    margin-top:18px;
-}
-
-.menu-item{
-    width:100%;
-    border:0;
-    background:white;
-    padding:18px;
-    display:flex;
-    align-items:center;
-    gap:14px;
-    border-bottom:1px solid var(--border);
-    text-align:left;
-    color:var(--dark);
-}
-
-.menu-item:last-child{
-    border-bottom:0;
-}
-
-.menu-item span:first-child{
-    font-size:22px;
-}
-
-.menu-item strong{
-    flex:1;
-}
-
-/* FORMS */
-
-.form-card{
-    background:white;
-    border-radius:22px;
-    padding:22px;
-    box-shadow:var(--shadow);
-}
-
-.form-card h2{
-    margin-bottom:8px;
-}
-
-.form-card p{
-    color:var(--muted);
-    margin-bottom:22px;
-    line-height:1.5;
-}
-
-.alert{
-    padding:13px;
-    border-radius:12px;
-    margin-bottom:15px;
-    font-size:14px;
-    display:none;
-}
-
-.alert.show{
-    display:block;
-}
-
-.alert.error{
-    background:#fee2e2;
-    color:#991b1b;
-}
-
-.alert.success{
-    background:#dcfce7;
-    color:#166534;
-}
-
-/* BOTTOM NAV */
-
-.bottom-nav{
-    position:fixed;
-    bottom:0;
-    left:0;
-    right:0;
-    height:76px;
-    background:rgba(255,255,255,.97);
-    border-top:1px solid var(--border);
-    display:none;
-    justify-content:center;
-    z-index:100;
-    padding-bottom:env(safe-area-inset-bottom);
-}
-
-.bottom-nav.visible{
-    display:flex;
-}
-
-.nav-inner{
-    width:100%;
-    max-width:520px;
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-}
-
-.nav-btn{
-    border:0;
-    background:transparent;
-    color:#6b7280;
-    font-size:11px;
-    font-weight:700;
-}
-
-.nav-btn span{
-    display:block;
-    font-size:22px;
-    margin-bottom:3px;
-}
-
-.nav-btn.active{
-    color:var(--dark);
-}
-
-/* MODAL */
-
-.modal{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.45);
-    display:none;
-    align-items:flex-end;
-    justify-content:center;
-    z-index:200;
-}
-
-.modal.show{
-    display:flex;
-}
-
-.modal-box{
-    width:100%;
-    max-width:520px;
-    background:white;
-    border-radius:25px 25px 0 0;
-    padding:25px 20px 30px;
-}
-
-.modal-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:20px;
-}
-
-.close-btn{
-    width:38px;
-    height:38px;
-    border:0;
-    border-radius:50%;
-    background:#f3f4f6;
-}
-
-/* TOAST */
-
-.toast{
-    position:fixed;
-    left:50%;
-    bottom:90px;
-    transform:translateX(-50%) translateY(20px);
-    background:var(--dark);
-    color:white;
-    padding:13px 18px;
-    border-radius:12px;
-    font-size:14px;
-    opacity:0;
-    pointer-events:none;
-    transition:.25s;
-    z-index:300;
-    max-width:90%;
-    text-align:center;
-}
-
-.toast.show{
-    opacity:1;
-    transform:translateX(-50%) translateY(0);
-}
-
-/* DESKTOP */
-
-@media(min-width:700px){
-    .container{
-        padding-top:35px;
-    }
-
-    .hero h1{
-        font-size:48px;
-    }
-}
+:root{--dark:#111827;--dark2:#1f2937;--bg:#f5f7fa;--card:#fff;--text:#111827;--muted:#6b7280;--border:#e5e7eb;--green:#16a34a;--red:#dc2626;--blue:#2563eb;--shadow:0 10px 30px rgba(17,24,39,.08)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+button,input{font:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
+.topbar{height:70px;background:var(--dark);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 20px;position:sticky;top:0;z-index:50}
+.logo{font-size:24px;font-weight:800;letter-spacing:-.5px}
+.top-actions{display:flex;gap:8px}
+.icon-btn{width:42px;height:42px;border:0;border-radius:50%;background:rgba(255,255,255,.1);color:#fff;font-size:19px}
+.container{width:100%;max-width:520px;margin:0 auto;padding:24px 18px 110px}
+.page{display:none}
+.page.active{display:block}
+.hero{text-align:center;padding:42px 8px 25px}
+.hero h1{font-size:38px;line-height:1.08;letter-spacing:-1.5px;margin-bottom:16px}
+.hero p{color:var(--muted);font-size:18px;line-height:1.5}
+.home-card{background:#fff;border-radius:26px;padding:26px 22px;box-shadow:var(--shadow)}
+.feature{display:flex;align-items:center;gap:16px;margin-bottom:22px}
+.feature:last-of-type{margin-bottom:28px}
+.feature-icon{width:58px;height:58px;border-radius:18px;background:#f1f3f5;display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0}
+.feature h3{font-size:19px;margin-bottom:4px}
+.feature p{color:var(--muted);font-size:15px;line-height:1.4}
+.main-btn{width:100%;border:0;border-radius:16px;padding:17px;background:var(--dark);color:#fff;font-weight:700;font-size:17px;margin-top:10px}
+.secondary-btn{width:100%;border:0;border-radius:16px;padding:17px;background:#e5e7eb;color:var(--dark);font-weight:700;font-size:17px;margin-top:10px}
+.outline-btn{width:100%;border:1px solid var(--border);border-radius:14px;padding:14px;background:#fff;color:var(--dark);font-weight:700;margin-top:10px}
+.demo-note{text-align:center;color:var(--muted);font-size:13px;line-height:1.5;padding:25px 10px}
+.auth-card{background:#fff;border-radius:24px;padding:26px 22px;box-shadow:var(--shadow);margin-top:25px}
+.auth-card h2{font-size:28px;margin-bottom:8px}
+.auth-card .subtitle{color:var(--muted);margin-bottom:25px}
+.field{margin-bottom:17px}
+.field label{display:block;font-size:14px;font-weight:700;margin-bottom:7px}
+.field input{width:100%;border:1px solid #d1d5db;border-radius:13px;padding:14px;outline:none;background:#fff}
+.field input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+.back-btn{border:0;background:none;color:var(--muted);margin-bottom:20px;font-weight:600}
+.greeting{margin-bottom:20px}
+.greeting h2{font-size:26px;margin-bottom:5px}
+.greeting p{color:var(--muted)}
+.balance-card{background:var(--dark);color:#fff;border-radius:24px;padding:25px;box-shadow:var(--shadow)}
+.balance-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.demo-badge{background:rgba(255,255,255,.13);padding:6px 10px;border-radius:20px;font-size:11px;font-weight:700}
+.balance-label{color:#cbd5e1;font-size:14px}
+.balance-value{font-size:38px;font-weight:800;margin-top:6px}
+.quick-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0 25px}
+.quick-btn{border:0;background:#fff;border-radius:17px;padding:14px 5px;box-shadow:0 5px 18px rgba(0,0,0,.06);color:var(--dark);font-weight:700;font-size:12px}
+.quick-btn span{display:block;font-size:23px;margin-bottom:7px}
+.section-title{display:flex;justify-content:space-between;align-items:center;margin:24px 0 12px}
+.section-title h3{font-size:19px}
+.link-btn{border:0;background:none;color:var(--blue);font-weight:700}
+.list{background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 5px 20px rgba(0,0,0,.04)}
+.transaction{display:flex;align-items:center;gap:13px;padding:16px;border-bottom:1px solid var(--border)}
+.transaction:last-child{border-bottom:0}
+.tx-icon{width:44px;height:44px;border-radius:14px;background:#f1f5f9;display:flex;align-items:center;justify-content:center;font-size:20px}
+.tx-info{flex:1}
+.tx-info strong{display:block;font-size:15px;margin-bottom:4px}
+.tx-info small{color:var(--muted)}
+.tx-value{font-weight:800}
+.positive{color:var(--green)}
+.negative{color:var(--red)}
+.empty{padding:25px;text-align:center;color:var(--muted)}
+.virtual-card{min-height:275px;border-radius:26px;padding:24px;background:radial-gradient(circle at 85% 20%,rgba(255,255,255,.16),transparent 28%),linear-gradient(135deg,#0f172a,#1f2937 55%,#374151);color:#fff;position:relative;overflow:hidden;box-shadow:0 15px 35px rgba(15,23,42,.22)}
+.virtual-card:before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;border:1px solid rgba(255,255,255,.08);right:-100px;top:-120px}
+.virtual-card:after{content:"";position:absolute;width:190px;height:190px;border-radius:50%;background:rgba(255,255,255,.04);left:-80px;bottom:-100px}
+.card-top{display:flex;justify-content:space-between;align-items:center;position:relative;z-index:2}
+.card-brand{font-size:21px;font-weight:800;letter-spacing:-.5px}
+.card-demo-label{font-size:10px;font-weight:800;letter-spacing:1px;padding:6px 9px;border-radius:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.12)}
+.card-contactless{position:absolute;right:25px;top:76px;font-size:18px;color:#d1d5db;transform:rotate(90deg);letter-spacing:-4px;z-index:2}
+.card-chip{width:43px;height:32px;margin-top:32px;border-radius:7px;background:linear-gradient(135deg,#d1d5db,#9ca3af);color:#374151;display:flex;align-items:center;justify-content:center;font-size:19px;position:relative;z-index:2}
+.card-number{font-size:21px;letter-spacing:2px;margin-top:19px;font-weight:600;position:relative;z-index:2}
+.card-details{display:grid;grid-template-columns:1fr auto auto;gap:18px;margin-top:20px;position:relative;z-index:2}
+.card-details div{display:flex;flex-direction:column;gap:4px}
+.card-label{font-size:8px;color:#9ca3af;letter-spacing:1px;font-weight:700}
+.card-details strong{font-size:11px;letter-spacing:.5px;text-transform:uppercase}
+.card-footer{display:flex;justify-content:space-between;margin-top:18px;font-size:9px;color:#9ca3af;letter-spacing:1px;position:relative;z-index:2}
+.profile-card{background:#fff;border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+.avatar{width:70px;height:70px;border-radius:50%;background:var(--dark);color:#fff;display:flex;align-items:center;justify-content:center;font-size:25px;font-weight:800;margin-bottom:14px}
+.profile-card h2{margin-bottom:5px}
+.profile-card p{color:var(--muted)}
+.menu-list{background:#fff;border-radius:20px;overflow:hidden;margin-top:18px}
+.menu-item{width:100%;border:0;background:#fff;padding:18px;display:flex;align-items:center;gap:14px;border-bottom:1px solid var(--border);text-align:left;color:var(--dark)}
+.menu-item:last-child{border-bottom:0}
+.menu-item span:first-child{font-size:22px}
+.menu-item strong{flex:1}
+.form-card{background:#fff;border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+.form-card h2{margin-bottom:8px}
+.form-card p{color:var(--muted);margin-bottom:22px;line-height:1.5}
+.alert{padding:13px;border-radius:12px;margin-bottom:15px;font-size:14px;display:none}
+.alert.show{display:block}
+.alert.error{background:#fee2e2;color:#991b1b}
+.alert.success{background:#dcfce7;color:#166534}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;height:76px;background:rgba(255,255,255,.97);border-top:1px solid var(--border);display:none;justify-content:center;z-index:100;padding-bottom:env(safe-area-inset-bottom)}
+.bottom-nav.visible{display:flex}
+.nav-inner{width:100%;max-width:520px;display:grid;grid-template-columns:repeat(4,1fr)}
+.nav-btn{border:0;background:transparent;color:#6b7280;font-size:11px;font-weight:700}
+.nav-btn span{display:block;font-size:22px;margin-bottom:3px}
+.nav-btn.active{color:var(--dark)}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:flex-end;justify-content:center;z-index:200}
+.modal.show{display:flex}
+.modal-box{width:100%;max-width:520px;background:#fff;border-radius:25px 25px 0 0;padding:25px 20px 30px}
+.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.close-btn{width:38px;height:38px;border:0;border-radius:50%;background:#f3f4f6}
+.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%) translateY(20px);background:var(--dark);color:#fff;padding:13px 18px;border-radius:12px;font-size:14px;opacity:0;pointer-events:none;transition:.25s;z-index:300;max-width:90%;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(min-width:700px){.container{padding-top:35px}.hero h1{font-size:48px}}
 </style>
 </head>
-
 <body>
 
-<!-- HEADER -->
 <header class="topbar">
-    <div class="logo">Triple Bank</div>
-
-    <div class="top-actions" id="topActions">
-        <button class="icon-btn" id="notificationBtn" aria-label="Notificações">🔔</button>
-        <button class="icon-btn" id="profileTopBtn" aria-label="Perfil">👤</button>
-    </div>
+<div class="logo">Triple Bank</div>
+<div class="top-actions" id="topActions">
+<button class="icon-btn" id="notificationBtn" aria-label="Notificações">🔔</button>
+<button class="icon-btn" id="profileTopBtn" aria-label="Perfil">👤</button>
+</div>
 </header>
 
 <main class="container">
 
-    <!-- HOME -->
-    <section id="homePage" class="page active">
-
-        <div class="hero">
-            <h1>O teu dinheiro, mais simples.</h1>
-            <p>
-                Uma plataforma digital moderna para gerir
-                a tua experiência financeira.
-            </p>
-        </div>
-
-        <div class="home-card">
-
-            <div class="feature">
-                <div class="feature-icon">💰</div>
-                <div>
-                    <h3>Gestão de saldo</h3>
-                    <p>Acompanha o teu saldo num só lugar.</p>
-                </div>
-            </div>
-
-            <div class="feature">
-                <div class="feature-icon">📊</div>
-                <div>
-                    <h3>Movimentos</h3>
-                    <p>Consulta o histórico da tua conta.</p>
-                </div>
-            </div>
-
-            <div class="feature">
-                <div class="feature-icon">🔐</div>
-                <div>
-                    <h3>Conta pessoal</h3>
-                    <p>Uma área privada para cada utilizador.</p>
-                </div>
-            </div>
-
-            <button class="main-btn" id="goLogin">
-                Entrar na conta
-            </button>
-
-            <button class="secondary-btn" id="goRegister">
-                Criar conta
-            </button>
-
-        </div>
-
-        <div class="demo-note">
-            Triple Bank — versão de demonstração.<br>
-            As funcionalidades apresentadas não movimentam dinheiro real.
-        </div>
-
-    </section>
-
-
-    <!-- LOGIN -->
-    <section id="loginPage" class="page">
-
-        <button class="back-btn" id="backFromLogin">
-            ← Voltar
-        </button>
-
-        <div class="auth-card">
-
-            <h2>Entrar</h2>
-            <p class="subtitle">
-                Acede à tua conta de demonstração.
-            </p>
-
-            <div id="loginAlert" class="alert"></div>
-
-            <div class="field">
-                <label for="loginEmail">Email</label>
-                <input
-                    type="email"
-                    id="loginEmail"
-                    placeholder="exemplo@email.com"
-                >
-            </div>
-
-            <div class="field">
-                <label for="loginPassword">Palavra-passe</label>
-                <input
-                    type="password"
-                    id="loginPassword"
-                    placeholder="A tua palavra-passe"
-                >
-            </div>
-
-            <button class="main-btn" id="loginBtn">
-                Entrar
-            </button>
-
-            <button class="outline-btn" id="goRegisterFromLogin">
-                Ainda não tenho conta
-            </button>
-
-        </div>
-
-    </section>
-
-
-    <!-- REGISTER -->
-    <section id="registerPage" class="page">
-
-        <button class="back-btn" id="backFromRegister">
-            ← Voltar
-        </button>
-
-        <div class="auth-card">
-
-            <h2>Criar conta</h2>
-            <p class="subtitle">
-                Cria uma conta de demonstração no Triple Bank.
-            </p>
-
-            <div id="registerAlert" class="alert"></div>
-
-            <div class="field">
-                <label for="registerName">Nome</label>
-                <input
-                    type="text"
-                    id="registerName"
-                    placeholder="O teu nome"
-                >
-            </div>
-
-            <div class="field">
-                <label for="registerEmail">Email</label>
-                <input
-                    type="email"
-                    id="registerEmail"
-                    placeholder="exemplo@email.com"
-                >
-            </div>
-
-            <div class="field">
-                <label for="registerPassword">Palavra-passe</label>
-                <input
-                    type="password"
-                    id="registerPassword"
-                    placeholder="Cria uma palavra-passe"
-                >
-            </div>
-
-            <button class="main-btn" id="registerBtn">
-                Criar conta
-            </button>
-
-            <button class="outline-btn" id="goLoginFromRegister">
-                Já tenho conta
-            </button>
-
-        </div>
-
-    </section>
-
-
-    <!-- DASHBOARD -->
-    <section id="dashboardPage" class="page">
-
-        <div class="greeting">
-            <h2 id="greetingName">Olá 👋</h2>
-            <p>Bem-vindo de volta ao Triple Bank.</p>
-        </div>
-
-        <div class="balance-card">
-
-            <div class="balance-top">
-                <span class="balance-label">
-                    Saldo disponível
-                </span>
-
-                <span class="demo-badge">
-                    DEMO
-                </span>
-            </div>
-
-            <div class="balance-value" id="balanceValue">
-                €0,00
-            </div>
-
-        </div>
-
-        <div class="quick-actions">
-
-            <button class="quick-btn" id="quickAdd">
-                <span>💰</span>
-                Adicionar
-            </button>
-
-            <button class="quick-btn" id="quickSend">
-                <span>💸</span>
-                Enviar
-            </button>
-
-            <button class="quick-btn" id="quickCard">
-                <span>💳</span>
-                Cartão
-            </button>
-
-            <button class="quick-btn" id="quickTransactions">
-                <span>📊</span>
-                Movimentos
-            </button>
-
-        </div>
-
-        <div class="section-title">
-            <h3>Movimentos recentes</h3>
-            <button class="link-btn" id="seeAllTransactions">
-                Ver todos
-            </button>
-        </div>
-
-        <div class="list" id="recentTransactions"></div>
-
-    </section>
-
-
-    <!-- TRANSACTIONS -->
-    <section id="transactionsPage" class="page">
-
-        <div class="section-title">
-            <h2>Movimentos</h2>
-        </div>
-
-        <div class="list" id="allTransactions"></div>
-
-    </section>
-
-
-    <!-- CARD -->
-    <section id="cardPage" class="page">
-
-        <div class="section-title">
-            <h2>Cartão</h2>
-        </div>
-
-        <div class="virtual-card">
-
-            <div class="card-brand">
-                Triple Bank
-            </div>
-
-            <div class="card-chip">
-                ▣
-            </div>
-
-            <div class="card-number">
-                0000 0000 0000 0000
-            </div>
-
-            <div class="card-bottom">
-                <span>DEMO</span>
-                <span>12/30</span>
-            </div>
-
-        </div>
-
-        <div class="demo-note">
-            Este cartão é apenas visual e faz parte da demonstração.
-            Não permite pagamentos reais.
-        </div>
-
-    </section>
-
-
-    <!-- PROFILE -->
-    <section id="profilePage" class="page">
-
-        <div class="section-title">
-            <h2>Perfil</h2>
-        </div>
-
-        <div class="profile-card">
-
-            <div class="avatar" id="profileAvatar">
-                TB
-            </div>
-
-            <h2 id="profileName">
-                Utilizador
-            </h2>
-
-            <p id="profileEmail">
-                -
-            </p>
-
-        </div>
-
-        <div class="menu-list">
-
-            <button class="menu-item" id="settingsBtn">
-                <span>⚙️</span>
-                <strong>Definições</strong>
-                <span>›</span>
-            </button>
-
-            <button class="menu-item" id="statementBtn">
-                <span>📄</span>
-                <strong>Extrato de demonstração</strong>
-                <span>›</span>
-            </button>
-
-            <button class="menu-item" id="helpBtn">
-                <span>❓</span>
-                <strong>Ajuda</strong>
-                <span>›</span>
-            </button>
-
-            <button class="menu-item" id="logoutBtn">
-                <span>🚪</span>
-                <strong>Terminar sessão</strong>
-                <span>›</span>
-            </button>
-
-        </div>
-
-    </section>
-
-
-    <!-- SETTINGS -->
-    <section id="settingsPage" class="page">
-
-        <button class="back-btn" id="backFromSettings">
-            ← Perfil
-        </button>
-
-        <div class="form-card">
-
-            <h2>Definições</h2>
-
-            <p>
-                Estas definições pertencem apenas à versão
-                de demonstração do Triple Bank.
-            </p>
-
-            <button class="outline-btn" id="clearDataBtn">
-                🗑️ Limpar dados da demonstração
-            </button>
-
-        </div>
-
-    </section>
-
-
-    <!-- HELP -->
-    <section id="helpPage" class="page">
-
-        <button class="back-btn" id="backFromHelp">
-            ← Perfil
-        </button>
-
-        <div class="form-card">
-
-            <h2>Ajuda</h2>
-
-            <p>
-                O Triple Bank apresentado neste projeto é uma
-                demonstração. Os saldos e movimentos são guardados
-                apenas neste navegador.
-            </p>
-
-            <p>
-                Nenhum dinheiro real é depositado, enviado ou
-                levantado através desta versão.
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <!-- STATEMENT -->
-    <section id="statementPage" class="page">
-
-        <button class="back-btn" id="backFromStatement">
-            ← Perfil
-        </button>
-
-        <div class="form-card">
-
-            <h2>Extrato</h2>
-
-            <p>
-                Extrato de demonstração da atividade desta conta.
-            </p>
-
-            <div class="list" id="statementTransactions"></div>
-
-        </div>
-
-    </section>
+<section id="homePage" class="page active">
+<div class="hero">
+<h1>O teu dinheiro, mais simples.</h1>
+<p>Uma plataforma digital moderna para gerir a tua experiência financeira.</p>
+</div>
+<div class="home-card">
+<div class="feature"><div class="feature-icon">💰</div><div><h3>Gestão de saldo</h3><p>Acompanha o teu saldo num só lugar.</p></div></div>
+<div class="feature"><div class="feature-icon">📊</div><div><h3>Movimentos</h3><p>Consulta o histórico da tua conta.</p></div></div>
+<div class="feature"><div class="feature-icon">🔐</div><div><h3>Conta pessoal</h3><p>Uma área privada para cada utilizador.</p></div></div>
+<button class="main-btn" id="goLogin">Entrar na conta</button>
+<button class="secondary-btn" id="goRegister">Criar conta</button>
+</div>
+<div class="demo-note">Triple Bank — versão de demonstração.<br>As funcionalidades apresentadas não movimentam dinheiro real.</div>
+</section>
+
+<section id="loginPage" class="page">
+<button class="back-btn" id="backFromLogin">← Voltar</button>
+<div class="auth-card">
+<h2>Entrar</h2>
+<p class="subtitle">Acede à tua conta de demonstração.</p>
+<div id="loginAlert" class="alert"></div>
+<div class="field"><label for="loginEmail">Email</label><input type="email" id="loginEmail" placeholder="exemplo@email.com"></div>
+<div class="field"><label for="loginPassword">Palavra-passe</label><input type="password" id="loginPassword" placeholder="A tua palavra-passe"></div>
+<button class="main-btn" id="loginBtn">Entrar</button>
+<button class="outline-btn" id="goRegisterFromLogin">Ainda não tenho conta</button>
+</div>
+</section>
+
+<section id="registerPage" class="page">
+<button class="back-btn" id="backFromRegister">← Voltar</button>
+<div class="auth-card">
+<h2>Criar conta</h2>
+<p class="subtitle">Cria uma conta de demonstração no Triple Bank.</p>
+<div id="registerAlert" class="alert"></div>
+<div class="field"><label for="registerName">Nome</label><input type="text" id="registerName" placeholder="O teu nome"></div>
+<div class="field"><label for="registerEmail">Email</label><input type="email" id="registerEmail" placeholder="exemplo@email.com"></div>
+<div class="field"><label for="registerPassword">Palavra-passe</label><input type="password" id="registerPassword" placeholder="Cria uma palavra-passe"></div>
+<button class="main-btn" id="registerBtn">Criar conta</button>
+<button class="outline-btn" id="goLoginFromRegister">Já tenho conta</button>
+</div>
+</section>
+
+<section id="dashboardPage" class="page">
+<div class="greeting"><h2 id="greetingName">Olá 👋</h2><p>Bem-vindo de volta ao Triple Bank.</p></div>
+<div class="balance-card">
+<div class="balance-top"><span class="balance-label">Saldo disponível</span><span class="demo-badge">DEMO</span></div>
+<div class="balance-value" id="balanceValue">€0,00</div>
+</div>
+<div class="quick-actions">
+<button class="quick-btn" id="quickAdd"><span>💰</span>Adicionar</button>
+<button class="quick-btn" id="quickSend"><span>💸</span>Enviar</button>
+<button class="quick-btn" id="quickCard"><span>💳</span>Cartão</button>
+<button class="quick-btn" id="quickTransactions"><span>📊</span>Movimentos</button>
+</div>
+<div class="section-title"><h3>Movimentos recentes</h3><button class="link-btn" id="seeAllTransactions">Ver todos</button></div>
+<div class="list" id="recentTransactions"></div>
+</section>
+
+<section id="transactionsPage" class="page">
+<div class="section-title"><h2>Movimentos</h2></div>
+<div class="list" id="allTransactions"></div>
+</section>
+
+<section id="cardPage" class="page">
+<div class="section-title"><h2>Cartão</h2></div>
+<div class="virtual-card">
+<div class="card-top">
+<div class="card-brand">Triple Bank</div>
+<div class="card-demo-label">DEMO</div>
+</div>
+<div class="card-contactless">))))</div>
+<div class="card-chip">▣</div>
+<div class="card-number" id="cardNumber">•••• •••• •••• 0000</div>
+<div class="card-details">
+<div><span class="card-label">TITULAR</span><strong id="cardHolderName">UTILIZADOR</strong></div>
+<div><span class="card-label">VALIDADE</span><strong>12/30</strong></div>
+<div><span class="card-label">CVV</span><strong id="cardCVV">•••</strong></div>
+</div>
+<div class="card-footer"><span>TRIPLE BANK</span><span>VIRTUAL</span></div>
+</div>
+<button class="outline-btn" id="toggleCardDetails">👁️ Mostrar dados do cartão</button>
+<div class="demo-note"><strong>Cartão de demonstração</strong><br>Este cartão é apenas visual e não pode ser utilizado para pagamentos ou levantamentos reais.</div>
+</section>
+
+<section id="profilePage" class="page">
+<div class="section-title"><h2>Perfil</h2></div>
+<div class="profile-card">
+<div class="avatar" id="profileAvatar">TB</div>
+<h2 id="profileName">Utilizador</h2>
+<p id="profileEmail">-</p>
+</div>
+<div class="menu-list">
+<button class="menu-item" id="settingsBtn"><span>⚙️</span><strong>Definições</strong><span>›</span></button>
+<button class="menu-item" id="statementBtn"><span>📄</span><strong>Extrato de demonstração</strong><span>›</span></button>
+<button class="menu-item" id="helpBtn"><span>❓</span><strong>Ajuda</strong><span>›</span></button>
+<button class="menu-item" id="logoutBtn"><span>🚪</span><strong>Terminar sessão</strong><span>›</span></button>
+</div>
+</section>
+
+<section id="settingsPage" class="page">
+<button class="back-btn" id="backFromSettings">← Perfil</button>
+<div class="form-card">
+<h2>Definições</h2>
+<p>Estas definições pertencem apenas à versão de demonstração do Triple Bank.</p>
+<button class="outline-btn" id="clearDataBtn">🗑️ Limpar dados da demonstração</button>
+</div>
+</section>
+
+<section id="helpPage" class="page">
+<button class="back-btn" id="backFromHelp">← Perfil</button>
+<div class="form-card">
+<h2>Ajuda</h2>
+<p>O Triple Bank apresentado neste projeto é uma demonstração. Os saldos e movimentos são guardados apenas neste navegador.</p>
+<p>Nenhum dinheiro real é depositado, enviado ou levantado através desta versão.</p>
+</div>
+</section>
+
+<section id="statementPage" class="page">
+<button class="back-btn" id="backFromStatement">← Perfil</button>
+<div class="form-card">
+<h2>Extrato</h2>
+<p>Extrato de demonstração da atividade desta conta.</p>
+<div class="list" id="statementTransactions"></div>
+</div>
+</section>
 
 </main>
 
-
-<!-- BOTTOM NAVIGATION -->
 <nav class="bottom-nav" id="bottomNav">
-
-    <div class="nav-inner">
-
-        <button class="nav-btn active" id="navHome">
-            <span>⌂</span>
-            Início
-        </button>
-
-        <button class="nav-btn" id="navTransactions">
-            <span>📊</span>
-            Movimentos
-        </button>
-
-        <button class="nav-btn" id="navCard">
-            <span>💳</span>
-            Cartão
-        </button>
-
-        <button class="nav-btn" id="navProfile">
-            <span>👤</span>
-            Perfil
-        </button>
-
-    </div>
-
+<div class="nav-inner">
+<button class="nav-btn active" id="navHome"><span>⌂</span>Início</button>
+<button class="nav-btn" id="navTransactions"><span>📊</span>Movimentos</button>
+<button class="nav-btn" id="navCard"><span>💳</span>Cartão</button>
+<button class="nav-btn" id="navProfile"><span>👤</span>Perfil</button>
+</div>
 </nav>
 
-
-<!-- ADD BALANCE MODAL -->
 <div class="modal" id="addModal">
-
-    <div class="modal-box">
-
-        <div class="modal-header">
-            <h2>Adicionar saldo</h2>
-
-            <button class="close-btn" id="closeAddModal">
-                ✕
-            </button>
-        </div>
-
-        <p style="color:#6b7280;margin-bottom:20px;">
-            Adiciona saldo fictício para testar o projeto.
-        </p>
-
-        <div class="field">
-            <label for="addAmount">Valor (€)</label>
-            <input
-                type="number"
-                id="addAmount"
-                min="1"
-                step="0.01"
-                placeholder="100"
-            >
-        </div>
-
-        <button class="main-btn" id="addBalanceBtn">
-            💰 Adicionar saldo fictício
-        </button>
-
-    </div>
-
+<div class="modal-box">
+<div class="modal-header"><h2>Adicionar saldo</h2><button class="close-btn" id="closeAddModal">✕</button></div>
+<p style="color:#6b7280;margin-bottom:20px;">Adiciona saldo fictício para testar o projeto.</p>
+<div class="field"><label for="addAmount">Valor (€)</label><input type="number" id="addAmount" min="1" step="0.01" placeholder="100"></div>
+<button class="main-btn" id="addBalanceBtn">💰 Adicionar saldo fictício</button>
+</div>
 </div>
 
-
-<!-- SEND MODAL -->
 <div class="modal" id="sendModal">
-
-    <div class="modal-box">
-
-        <div class="modal-header">
-            <h2>Enviar</h2>
-
-            <button class="close-btn" id="closeSendModal">
-                ✕
-            </button>
-        </div>
-
-        <p style="color:#6b7280;margin-bottom:20px;">
-            Envio fictício entre utilizadores.
-        </p>
-
-        <div id="sendAlert" class="alert"></div>
-
-        <div class="field">
-            <label for="sendEmail">Email do destinatário</label>
-            <input
-                type="email"
-                id="sendEmail"
-                placeholder="destinatario@email.com"
-            >
-        </div>
-
-        <div class="field">
-            <label for="sendAmount">Valor (€)</label>
-            <input
-                type="number"
-                id="sendAmount"
-                min="1"
-                step="0.01"
-                placeholder="20"
-            >
-        </div>
-
-        <button class="main-btn" id="sendBalanceBtn">
-            💸 Enviar saldo fictício
-        </button>
-
-    </div>
-
+<div class="modal-box">
+<div class="modal-header"><h2>Enviar</h2><button class="close-btn" id="closeSendModal">✕</button></div>
+<p style="color:#6b7280;margin-bottom:20px;">Envio fictício entre utilizadores.</p>
+<div id="sendAlert" class="alert"></div>
+<div class="field"><label for="sendEmail">Email do destinatário</label><input type="email" id="sendEmail" placeholder="destinatario@email.com"></div>
+<div class="field"><label for="sendAmount">Valor (€)</label><input type="number" id="sendAmount" min="1" step="0.01" placeholder="20"></div>
+<button class="main-btn" id="sendBalanceBtn">💸 Enviar saldo fictício</button>
+</div>
 </div>
 
-
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
-
 <script>
-/* =========================================================
-   TRIPLE BANK - DEMO
-   JavaScript principal
-   ========================================================= */
+document.addEventListener("DOMContentLoaded",function(){
+
+const pages={
+home:document.getElementById("homePage"),
+login:document.getElementById("loginPage"),
+register:document.getElementById("registerPage"),
+dashboard:document.getElementById("dashboardPage"),
+transactions:document.getElementById("transactionsPage"),
+card:document.getElementById("cardPage"),
+profile:document.getElementById("profilePage"),
+settings:document.getElementById("settingsPage"),
+help:document.getElementById("helpPage"),
+statement:document.getElementById("statementPage")
+};
+
+const bottomNav=document.getElementById("bottomNav");
+const balanceValue=document.getElementById("balanceValue");
+const greetingName=document.getElementById("greetingName");
+const profileName=document.getElementById("profileName");
+const profileEmail=document.getElementById("profileEmail");
+const profileAvatar=document.getElementById("profileAvatar");
+const recentTransactions=document.getElementById("recentTransactions");
+const allTransactions=document.getElementById("allTransactions");
+const statementTransactions=document.getElementById("statementTransactions");
+const addModal=document.getElementById("addModal");
+const sendModal=document.getElementById("sendModal");
+
+function getUser(){
+try{
+const saved=localStorage.getItem("tripleBankUser");
+if(!saved)return null;
+return JSON.parse(saved);
+}catch(error){
+console.error("Erro ao carregar utilizador:",error);
+return null;
+}
+}
+
+function saveUser(user){
+localStorage.setItem("tripleBankUser",JSON.stringify(user));
+}
+
+function formatMoney(value){
+return Number(value||0).toLocaleString("pt-PT",{style:"currency",currency:"EUR"});
+}
+
+function showToast(message){
+const toast=document.getElementById("toast");
+toast.textContent=message;
+toast.classList.add("show");
+setTimeout(function(){toast.classList.remove("show")},2500);
+}
+
+function showAlert(element,message,type){
+element.textContent=message;
+element.className="alert show "+type;
+}
+
+function hideAlert(element){
+element.textContent="";
+element.className="alert";
+}
+
+function showPage(pageName){
+Object.values(pages).forEach(function(page){page.classList.remove("active")});
+if(pages[pageName])pages[pageName].classList.add("active");
+updateNavigation(pageName);
+window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function updateNavigation(pageName){
+const user=getUser();
+if(user&&(pageName==="dashboard"||pageName==="transactions"||pageName==="card"||pageName==="profile")){
+bottomNav.classList.add("visible");
+}else{
+bottomNav.classList.remove("visible");
+}
+document.querySelectorAll(".nav-btn").forEach(function(button){button.classList.remove("active")});
+if(pageName==="dashboard")document.getElementById("navHome").classList.add("active");
+if(pageName==="transactions")document.getElementById("navTransactions").classList.add("active");
+if(pageName==="card")document.getElementById("navCard").classList.add("active");
+if(pageName==="profile")document.getElementById("navProfile").classList.add("active");
+}
+
+function updateDashboard(){
+const user=getUser();
+if(!user)return;
+if(!Array.isArray(user.transactions))user.transactions=[];
+if(typeof user.balance!=="number")user.balance=Number(user.balance)||0;
+saveUser(user);
+
+const firstName=(user.name||"Utilizador").trim().split(" ")[0];
+greetingName.textContent="Olá, "+firstName+" 👋";
+balanceValue.textContent=formatMoney(user.balance);
+profileName.textContent=user.name||"Utilizador";
+profileEmail.textContent=user.email||"-";
+
+const initials=(user.name||"TB").split(" ").filter(Boolean).slice(0,2).map(function(part){return part[0].toUpperCase()}).join("");
+profileAvatar.textContent=initials||"TB";
+
+updateCard();
+renderTransactions();
+}
+
+function renderTransactions(){
+const user=getUser();
+if(!user)return;
+
+const transactions=Array.isArray(user.transactions)?user.transactions:[];
+
+if(transactions.length===0){
+recentTransactions.innerHTML='<div class="empty">Ainda não tens movimentos.</div>';
+allTransactions.innerHTML='<div class="empty">Ainda não tens movimentos.</div>';
+statementTransactions.innerHTML='<div class="empty">Ainda não tens movimentos.</div>';
+return;
+}
 
-document.addEventListener("DOMContentLoaded", function(){
+const sorted=[...transactions].reverse();
 
-    /* -----------------------------
-       ELEMENTOS
-    ----------------------------- */
+recentTransactions.innerHTML=sorted.slice(0,5).map(transactionHTML).join("");
+allTransactions.innerHTML=sorted.map(transactionHTML).join("");
+statementTransactions.innerHTML=sorted.map(transactionHTML).join("");
+}
 
-    const pages = {
-        home: document.getElementById("homePage"),
-        login: document.getElementById("loginPage"),
-        register: document.getElementById("registerPage"),
-        dashboard: document.getElementById("dashboardPage"),
-        transactions: document.getElementById("transactionsPage"),
-        card: document.getElementById("cardPage"),
-        profile: document.getElementById("profilePage"),
-        settings: document.getElementById("settingsPage"),
-        help: document.getElementById("helpPage"),
-        statement: document.getElementById("statementPage")
-    };
+function transactionHTML(transaction){
+
+const description=String(transaction.description||"Movimento");
+
+const isFictitiousDeposit=description.toLowerCase().includes("saldo fictício adicionado");
+
+const positive=isFictitiousDeposit||transaction.type==="credit";
+
+const sign=positive?"+":"-";
+const colorClass=positive?"positive":"negative";
+const icon=positive?"↙️":"↗️";
+const amount=Math.abs(Number(transaction.amount||0));
+const date=transaction.date||"";
+
+return `
+<div class="transaction">
+<div class="tx-icon">${icon}</div>
+<div class="tx-info">
+<strong>${escapeHTML(description)}</strong>
+<small>${escapeHTML(date)}</small>
+</div>
+<div class="tx-value ${colorClass}">${sign}${formatMoney(amount)}</div>
+</div>`;
+}
+
+function escapeHTML(value){
+return String(value).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;");
+}
+
+function addTransaction(type,amount,description){
+const user=getUser();
+if(!user)return;
+if(!Array.isArray(user.transactions))user.transactions=[];
+
+user.transactions.push({
+type:type,
+amount:Number(amount),
+description:description,
+date:new Date().toLocaleString("pt-PT",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"})
+});
+
+saveUser(user);
+updateDashboard();
+}
 
-    const bottomNav = document.getElementById("bottomNav");
+document.getElementById("registerBtn").addEventListener("click",function(){
 
-    const balanceValue = document.getElementById("balanceValue");
-    const greetingName = document.getElementById("greetingName");
-    const profileName = document.getElementById("profileName");
-    const profileEmail = document.getElementById("profileEmail");
-    const profileAvatar = document.getElementById("profileAvatar");
+const name=document.getElementById("registerName").value.trim();
+const email=document.getElementById("registerEmail").value.trim().toLowerCase();
+const password=document.getElementById("registerPassword").value;
+const alert=document.getElementById("registerAlert");
 
-    const recentTransactions =
-        document.getElementById("recentTransactions");
+hideAlert(alert);
 
-    const allTransactions =
-        document.getElementById("allTransactions");
+if(!name||!email||!password){
+showAlert(alert,"Preenche todos os campos.","error");
+return;
+}
+
+if(password.length<4){
+showAlert(alert,"A palavra-passe deve ter pelo menos 4 caracteres.","error");
+return;
+}
 
-    const statementTransactions =
-        document.getElementById("statementTransactions");
+const user={name:name,email:email,password:password,balance:0,transactions:[]};
+
+saveUser(user);
+showToast("Conta criada com sucesso!");
 
-    const addModal = document.getElementById("addModal");
-    const sendModal = document.getElementById("sendModal");
+document.getElementById("registerName").value="";
+document.getElementById("registerEmail").value="";
+document.getElementById("registerPassword").value="";
 
-    /* -----------------------------
-       UTILIDADES
-    ----------------------------- */
-
-    function getUser(){
-        try{
-            const saved = localStorage.getItem("tripleBankUser");
-
-            if(!saved){
-                return null;
-            }
-
-            return JSON.parse(saved);
-
-        }catch(error){
-
-            console.error("Erro ao carregar utilizador:", error);
-            return null;
-        }
-    }
-
-    function saveUser(user){
-        localStorage.setItem(
-            "tripleBankUser",
-            JSON.stringify(user)
-        );
-    }
-
-    function formatMoney(value){
-        return Number(value || 0).toLocaleString(
-            "pt-PT",
-            {
-                style:"currency",
-                currency:"EUR"
-            }
-        );
-    }
-
-    function showToast(message){
-
-        const toast = document.getElementById("toast");
-
-        toast.textContent = message;
-        toast.classList.add("show");
-
-        setTimeout(function(){
-            toast.classList.remove("show");
-        },2500);
-    }
-
-    function showAlert(element,message,type){
-
-        element.textContent = message;
-        element.className = "alert show " + type;
-
-    }
-
-    function hideAlert(element){
-
-        element.textContent = "";
-        element.className = "alert";
-
-    }
-
-    /* -----------------------------
-       NAVEGAÇÃO
-    ----------------------------- */
-
-    function showPage(pageName){
-
-        Object.values(pages).forEach(function(page){
-            page.classList.remove("active");
-        });
-
-        if(pages[pageName]){
-            pages[pageName].classList.add("active");
-        }
-
-        updateNavigation(pageName);
-
-        window.scrollTo({
-            top:0,
-            behavior:"smooth"
-        });
-    }
-
-    function updateNavigation(pageName){
-
-        const user = getUser();
-
-        if(
-            user &&
-            (
-                pageName === "dashboard" ||
-                pageName === "transactions" ||
-                pageName === "card" ||
-                pageName === "profile"
-            )
-        ){
-            bottomNav.classList.add("visible");
-        }else{
-            bottomNav.classList.remove("visible");
-        }
+setTimeout(function(){
+showPage("login");
+document.getElementById("loginEmail").value=email;
+},500);
+});
 
-        document
-            .querySelectorAll(".nav-btn")
-            .forEach(function(button){
-                button.classList.remove("active");
-            });
+document.getElementById("loginBtn").addEventListener("click",function(){
 
-        if(pageName === "dashboard"){
-            document
-                .getElementById("navHome")
-                .classList.add("active");
-        }
+const email=document.getElementById("loginEmail").value.trim().toLowerCase();
+const password=document.getElementById("loginPassword").value;
+const alert=document.getElementById("loginAlert");
 
-        if(pageName === "transactions"){
-            document
-                .getElementById("navTransactions")
-                .classList.add("active");
-        }
+hideAlert(alert);
 
-        if(pageName === "card"){
-            document
-                .getElementById("navCard")
-                .classList.add("active");
-        }
+const user=getUser();
 
-        if(pageName === "profile"){
-            document
-                .getElementById("navProfile")
-                .classList.add("active");
-        }
-    }
+if(!user){
+showAlert(alert,"Ainda não existe uma conta. Cria uma primeiro.","error");
+return;
+}
 
-    /* -----------------------------
-       ATUALIZAR INTERFACE
-    ----------------------------- */
+if(email!==user.email||password!==user.password){
+showAlert(alert,"Email ou palavra-passe incorretos.","error");
+return;
+}
 
-    function updateDashboard(){
+localStorage.setItem("tripleBankLogged","true");
+updateDashboard();
+showPage("dashboard");
+showToast("Sessão iniciada!");
+});
 
-        const user = getUser();
+document.getElementById("goLogin").addEventListener("click",function(){showPage("login")});
+document.getElementById("goRegister").addEventListener("click",function(){showPage("register")});
+document.getElementById("backFromLogin").addEventListener("click",function(){showPage("home")});
+document.getElementById("backFromRegister").addEventListener("click",function(){showPage("home")});
+document.getElementById("goRegisterFromLogin").addEventListener("click",function(){showPage("register")});
+document.getElementById("goLoginFromRegister").addEventListener("click",function(){showPage("login")});
 
-        if(!user){
-            return;
-        }
+function openAddModal(){
+const user=getUser();
+if(!user){showPage("login");return}
+document.getElementById("addAmount").value="";
+addModal.classList.add("show");
+}
 
-        if(!Array.isArray(user.transactions)){
-            user.transactions = [];
-        }
+function closeAddModal(){
+addModal.classList.remove("show");
+}
 
-        if(typeof user.balance !== "number"){
-            user.balance = Number(user.balance) || 0;
-        }
+document.getElementById("quickAdd").addEventListener("click",openAddModal);
+document.getElementById("closeAddModal").addEventListener("click",closeAddModal);
 
-        saveUser(user);
+document.getElementById("addBalanceBtn").addEventListener("click",function(){
 
-        const firstName =
-            (user.name || "Utilizador")
-            .trim()
-            .split(" ")[0];
+const amount=Number(document.getElementById("addAmount").value);
 
-        greetingName.textContent =
-            "Olá, " + firstName + " 👋";
+if(!amount||amount<=0){
+showToast("Indica um valor válido.");
+return;
+}
 
-        balanceValue.textContent =
-            formatMoney(user.balance);
+const user=getUser();
+if(!user)return;
 
-        profileName.textContent =
-            user.name || "Utilizador";
+user.balance=Number(user.balance||0)+amount;
+saveUser(user);
 
-        profileEmail.textContent =
-            user.email || "-";
+addTransaction("credit",amount,"Saldo fictício adicionado");
 
-        const initials =
-            (user.name || "TB")
-            .split(" ")
-            .filter(Boolean)
-            .slice(0,2)
-            .map(function(part){
-                return part[0].toUpperCase();
-            })
-            .join("");
+closeAddModal();
+updateDashboard();
 
-        profileAvatar.textContent =
-            initials || "TB";
+showToast(formatMoney(amount)+" adicionados ao saldo fictício.");
+});
 
-        renderTransactions();
-    }
+function openSendModal(){
+const user=getUser();
+if(!user){showPage("login");return}
 
-    /* -----------------------------
-       MOVIMENTOS
-    ----------------------------- */
+hideAlert(document.getElementById("sendAlert"));
+document.getElementById("sendEmail").value="";
+document.getElementById("sendAmount").value="";
+sendModal.classList.add("show");
+}
 
-    function renderTransactions(){
+function closeSendModal(){
+sendModal.classList.remove("show");
+}
 
-        const user = getUser();
+document.getElementById("quickSend").addEventListener("click",openSendModal);
+document.getElementById("closeSendModal").addEventListener("click",closeSendModal);
 
-        if(!user){
-            return;
-        }
+document.getElementById("sendBalanceBtn").addEventListener("click",function(){
 
-        const transactions =
-            Array.isArray(user.transactions)
-            ? user.transactions
-            : [];
+const email=document.getElementById("sendEmail").value.trim();
+const amount=Number(document.getElementById("sendAmount").value);
+const alert=document.getElementById("sendAlert");
 
-        if(transactions.length === 0){
+hideAlert(alert);
 
-            recentTransactions.innerHTML =
-                '<div class="empty">Ainda não tens movimentos.</div>';
+const user=getUser();
 
-            allTransactions.innerHTML =
-                '<div class="empty">Ainda não tens movimentos.</div>';
+if(!email||!amount||amount<=0){
+showAlert(alert,"Preenche o email e um valor válido.","error");
+return;
+}
 
-            statementTransactions.innerHTML =
-                '<div class="empty">Ainda não tens movimentos.</div>';
+if(amount>Number(user.balance||0)){
+showAlert(alert,"Saldo fictício insuficiente.","error");
+return;
+}
 
-            return;
-        }
+user.balance=Number(user.balance||0)-amount;
+saveUser(user);
 
-        const sorted =
-            [...transactions].reverse();
+addTransaction("debit",amount,"Envio fictício para "+email);
 
-        recentTransactions.innerHTML =
-            sorted
-            .slice(0,5)
-            .map(transactionHTML)
-            .join("");
+closeSendModal();
+updateDashboard();
+showToast("Envio fictício realizado.");
+});
 
-        allTransactions.innerHTML =
-            sorted
-            .map(transactionHTML)
-            .join("");
+let cardDetailsVisible=false;
 
-        statementTransactions.innerHTML =
-            sorted
-            .map(transactionHTML)
-            .join("");
-    }
+function updateCard(){
 
-    function transactionHTML(transaction){
+const user=getUser();
 
-        const positive =
-            transaction.type === "credit";
+if(!user)return;
 
-        const sign =
-            positive ? "+" : "-";
+const cardHolderName=document.getElementById("cardHolderName");
+const cardNumber=document.getElementById("cardNumber");
+const cardCVV=document.getElementById("cardCVV");
 
-        const colorClass =
-            positive ? "positive" : "negative";
+if(cardHolderName){
+cardHolderName.textContent=(user.name||"UTILIZADOR").toUpperCase();
+}
 
-        const icon =
-            positive ? "↙️" : "↗️";
+if(cardDetailsVisible){
+cardNumber.textContent="0000 0000 0000 0000";
+cardCVV.textContent="000";
+}else{
+cardNumber.textContent="•••• •••• •••• 0000";
+cardCVV.textContent="•••";
+}
+}
 
-        const amount =
-            Math.abs(Number(transaction.amount || 0));
+document.getElementById("toggleCardDetails").addEventListener("click",function(){
 
-        const date =
-            transaction.date || "";
+cardDetailsVisible=!cardDetailsVisible;
 
-        return `
-            <div class="transaction">
-                <div class="tx-icon">${icon}</div>
+updateCard();
 
-                <div class="tx-info">
-                    <strong>${escapeHTML(transaction.description || "Movimento")}</strong>
-                    <small>${escapeHTML(date)}</small>
-                </div>
+this.textContent=cardDetailsVisible?"🙈 Ocultar dados do cartão":"👁️ Mostrar dados do cartão";
+});
 
-                <div class="tx-value ${colorClass}">
-                    ${sign}${formatMoney(amount)}
-                </div>
-            </div>
-        `;
-    }
+document.getElementById("quickCard").addEventListener("click",function(){
+updateCard();
+showPage("card");
+});
 
-    function escapeHTML(value){
+document.getElementById("quickTransactions").addEventListener("click",function(){
+showPage("transactions");
+});
 
-        return String(value)
-            .replace(/&/g,"&amp;")
-            .replace(/</g,"&lt;")
-            .replace(/>/g,"&gt;")
-            .replace(/"/g,"&quot;")
-            .replace(/'/g,"&#039;");
-    }
+document.getElementById("seeAllTransactions").addEventListener("click",function(){
+showPage("transactions");
+});
 
-    function addTransaction(type,amount,description){
+document.getElementById("navHome").addEventListener("click",function(){
+updateDashboard();
+showPage("dashboard");
+});
 
-        const user = getUser();
+document.getElementById("navTransactions").addEventListener("click",function(){
+renderTransactions();
+showPage("transactions");
+});
 
-        if(!user){
-            return;
-        }
+document.getElementById("navCard").addEventListener("click",function(){
+updateCard();
+showPage("card");
+});
 
-        if(!Array.isArray(user.transactions)){
-            user.transactions = [];
-        }
+document.getElementById("navProfile").addEventListener("click",function(){
+updateDashboard();
+showPage("profile");
+});
 
-        user.transactions.push({
+document.getElementById("profileTopBtn").addEventListener("click",function(){
 
-            type:type,
+const user=getUser();
 
-            amount:Number(amount),
+if(user){
+updateDashboard();
+showPage("profile");
+}else{
+showPage("login");
+}
+});
 
-            description:description,
+document.getElementById("notificationBtn").addEventListener("click",function(){
 
-            date:new Date().toLocaleString(
-                "pt-PT",
-                {
-                    day:"2-digit",
-                    month:"2-digit",
-                    year:"numeric",
-                    hour:"2-digit",
-                    minute:"2-digit"
-                }
-            )
-        });
+const user=getUser();
 
-        saveUser(user);
-        updateDashboard();
-    }
+if(!user){
+showToast("Inicia sessão para ver as notificações.");
+return;
+}
 
-    /* -----------------------------
-       CRIAR CONTA
-    ----------------------------- */
+showToast("Não tens novas notificações.");
+});
 
-    document
-        .getElementById("registerBtn")
-        .addEventListener("click",function(){
+document.getElementById("settingsBtn").addEventListener("click",function(){showPage("settings")});
 
-            const name =
-                document
-                .getElementById("registerName")
-                .value
-                .trim();
+document.getElementById("statementBtn").addEventListener("click",function(){
+renderTransactions();
+showPage("statement");
+});
 
-            const email =
-                document
-                .getElementById("registerEmail")
-                .value
-                .trim()
-                .toLowerCase();
+document.getElementById("helpBtn").addEventListener("click",function(){showPage("help")});
+document.getElementById("backFromSettings").addEventListener("click",function(){showPage("profile")});
+document.getElementById("backFromHelp").addEventListener("click",function(){showPage("profile")});
+document.getElementById("backFromStatement").addEventListener("click",function(){showPage("profile")});
 
-            const password =
-                document
-                .getElementById("registerPassword")
-                .value;
+document.getElementById("clearDataBtn").addEventListener("click",function(){
 
-            const alert =
-                document.getElementById("registerAlert");
+const confirmation=confirm("Queres apagar a conta e todos os dados da demonstração?");
 
-            hideAlert(alert);
+if(!confirmation)return;
 
-            if(!name || !email || !password){
+localStorage.removeItem("tripleBankUser");
+localStorage.removeItem("tripleBankLogged");
 
-                showAlert(
-                    alert,
-                    "Preenche todos os campos.",
-                    "error"
-                );
+showToast("Dados apagados.");
 
-                return;
-            }
+setTimeout(function(){
+showPage("home");
+},500);
+});
 
-            if(password.length < 4){
+document.getElementById("logoutBtn").addEventListener("click",function(){
 
-                showAlert(
-                    alert,
-                    "A palavra-passe deve ter pelo menos 4 caracteres.",
-                    "error"
-                );
+localStorage.removeItem("tripleBankLogged");
 
-                return;
-            }
+showToast("Sessão terminada.");
 
-            const user = {
+setTimeout(function(){
+showPage("home");
+},500);
+});
 
-                name:name,
+addModal.addEventListener("click",function(event){
+if(event.target===addModal)closeAddModal();
+});
 
-                email:email,
+sendModal.addEventListener("click",function(event){
+if(event.target===sendModal)closeSendModal();
+});
 
-                password:password,
+document.getElementById("loginPassword").addEventListener("keydown",function(event){
+if(event.key==="Enter")document.getElementById("loginBtn").click();
+});
 
-                balance:0,
+document.getElementById("registerPassword").addEventListener("keydown",function(event){
+if(event.key==="Enter")document.getElementById("registerBtn").click();
+});
 
-                transactions:[]
-            };
+const user=getUser();
+const logged=localStorage.getItem("tripleBankLogged");
 
-            saveUser(user);
-
-            showToast("Conta criada com sucesso!");
-
-            document
-                .getElementById("registerName")
-                .value = "";
-
-            document
-                .getElementById("registerEmail")
-                .value = "";
-
-            document
-                .getElementById("registerPassword")
-                .value = "";
-
-            setTimeout(function(){
-
-                showPage("login");
-
-                document
-                    .getElementById("loginEmail")
-                    .value = email;
-
-            },500);
-        });
-
-    /* -----------------------------
-       LOGIN
-    ----------------------------- */
-
-    document
-        .getElementById("loginBtn")
-        .addEventListener("click",function(){
-
-            const email =
-                document
-                .getElementById("loginEmail")
-                .value
-                .trim()
-                .toLowerCase();
-
-            const password =
-                document
-                .getElementById("loginPassword")
-                .value;
-
-            const alert =
-                document.getElementById("loginAlert");
-
-            hideAlert(alert);
-
-            const user = getUser();
-
-            if(!user){
-
-                showAlert(
-                    alert,
-                    "Ainda não existe uma conta. Cria uma primeiro.",
-                    "error"
-                );
-
-                return;
-            }
-
-            if(
-                email !== user.email ||
-                password !== user.password
-            ){
-
-                showAlert(
-                    alert,
-                    "Email ou palavra-passe incorretos.",
-                    "error"
-                );
-
-                return;
-            }
-
-            localStorage.setItem(
-                "tripleBankLogged",
-                "true"
-            );
-
-            updateDashboard();
-
-            showPage("dashboard");
-
-            showToast("Sessão iniciada!");
-        });
-
-    /* -----------------------------
-       NAVEGAÇÃO HOME / LOGIN
-    ----------------------------- */
-
-    document
-        .getElementById("goLogin")
-        .addEventListener("click",function(){
-
-            showPage("login");
-        });
-
-    document
-        .getElementById("goRegister")
-        .addEventListener("click",function(){
-
-            showPage("register");
-        });
-
-    document
-        .getElementById("backFromLogin")
-        .addEventListener("click",function(){
-
-            showPage("home");
-        });
-
-    document
-        .getElementById("backFromRegister")
-        .addEventListener("click",function(){
-
-            showPage("home");
-        });
-
-    document
-        .getElementById("goRegisterFromLogin")
-        .addEventListener("click",function(){
-
-            showPage("register");
-        });
-
-    document
-        .getElementById("goLoginFromRegister")
-        .addEventListener("click",function(){
-
-            showPage("login");
-        });
-
-    /* -----------------------------
-       ADICIONAR SALDO
-    ----------------------------- */
-
-    function openAddModal(){
-
-        const user = getUser();
-
-        if(!user){
-            showPage("login");
-            return;
-        }
-
-        document
-            .getElementById("addAmount")
-            .value = "";
-
-        addModal.classList.add("show");
-    }
-
-    function closeAddModal(){
-
-        addModal.classList.remove("show");
-    }
-
-    document
-        .getElementById("quickAdd")
-        .addEventListener("click",openAddModal);
-
-    document
-        .getElementById("closeAddModal")
-        .addEventListener("click",closeAddModal);
-
-    document
-        .getElementById("addBalanceBtn")
-        .addEventListener("click",function(){
-
-            const amount =
-                Number(
-                    document
-                    .getElementById("addAmount")
-                    .value
-                );
-
-            if(!amount || amount <= 0){
-
-                showToast("Indica um valor válido.");
-
-                return;
-            }
-
-            const user = getUser();
-
-            if(!user){
-                return;
-            }
-
-            user.balance =
-                Number(user.balance || 0) + amount;
-
-            saveUser(user);
-
-            addTransaction(
-                "credit",
-                amount,
-                "Saldo fictício adicionado"
-            );
-
-            closeAddModal();
-
-            updateDashboard();
-
-            showToast(
-                formatMoney(amount) +
-                " adicionados ao saldo fictício."
-            );
-        });
-
-    /* -----------------------------
-       ENVIAR
-    ----------------------------- */
-
-    function openSendModal(){
-
-        const user = getUser();
-
-        if(!user){
-            showPage("login");
-            return;
-        }
-
-        hideAlert(
-            document.getElementById("sendAlert")
-        );
-
-        document
-            .getElementById("sendEmail")
-            .value = "";
-
-        document
-            .getElementById("sendAmount")
-            .value = "";
-
-        sendModal.classList.add("show");
-    }
-
-    function closeSendModal(){
-
-        sendModal.classList.remove("show");
-    }
-
-    document
-        .getElementById("quickSend")
-        .addEventListener("click",openSendModal);
-
-    document
-        .getElementById("closeSendModal")
-        .addEventListener("click",closeSendModal);
-
-    document
-        .getElementById("sendBalanceBtn")
-        .addEventListener("click",function(){
-
-            const email =
-                document
-                .getElementById("sendEmail")
-                .value
-                .trim();
-
-            const amount =
-                Number(
-                    document
-                    .getElementById("sendAmount")
-                    .value
-                );
-
-            const alert =
-                document.getElementById("sendAlert");
-
-            hideAlert(alert);
-
-            const user = getUser();
-
-            if(!email || !amount || amount <= 0){
-
-                showAlert(
-                    alert,
-                    "Preenche o email e um valor válido.",
-                    "error"
-                );
-
-                return;
-            }
-
-            if(amount > Number(user.balance || 0)){
-
-                showAlert(
-                    alert,
-                    "Saldo fictício insuficiente.",
-                    "error"
-                );
-
-                return;
-            }
-
-            user.balance =
-                Number(user.balance || 0) - amount;
-
-            saveUser(user);
-
-            addTransaction(
-                "debit",
-                amount,
-                "Envio fictício para " + email
-            );
-
-            closeSendModal();
-
-            updateDashboard();
-
-            showToast(
-                "Envio fictício realizado."
-            );
-        });
-
-    /* -----------------------------
-       CARTÃO
-    ----------------------------- */
-
-    document
-        .getElementById("quickCard")
-        .addEventListener("click",function(){
-
-            showPage("card");
-        });
-
-    /* -----------------------------
-       MOVIMENTOS
-    ----------------------------- */
-
-    document
-        .getElementById("quickTransactions")
-        .addEventListener("click",function(){
-
-            showPage("transactions");
-        });
-
-    document
-        .getElementById("seeAllTransactions")
-        .addEventListener("click",function(){
-
-            showPage("transactions");
-        });
-
-    /* -----------------------------
-       BOTTOM NAV
-    ----------------------------- */
-
-    document
-        .getElementById("navHome")
-        .addEventListener("click",function(){
-
-            updateDashboard();
-            showPage("dashboard");
-        });
-
-    document
-        .getElementById("navTransactions")
-        .addEventListener("click",function(){
-
-            renderTransactions();
-            showPage("transactions");
-        });
-
-    document
-        .getElementById("navCard")
-        .addEventListener("click",function(){
-
-            showPage("card");
-        });
-
-    document
-        .getElementById("navProfile")
-        .addEventListener("click",function(){
-
-            updateDashboard();
-            showPage("profile");
-        });
-
-    /* -----------------------------
-       PERFIL
-    ----------------------------- */
-
-    document
-        .getElementById("profileTopBtn")
-        .addEventListener("click",function(){
-
-            const user = getUser();
-
-            if(user){
-                updateDashboard();
-                showPage("profile");
-            }else{
-                showPage("login");
-            }
-        });
-
-    /* -----------------------------
-       NOTIFICAÇÕES
-    ----------------------------- */
-
-    document
-        .getElementById("notificationBtn")
-        .addEventListener("click",function(){
-
-            const user = getUser();
-
-            if(!user){
-
-                showToast(
-                    "Inicia sessão para ver as notificações."
-                );
-
-                return;
-            }
-
-            showToast(
-                "Não tens novas notificações."
-            );
-        });
-
-    /* -----------------------------
-       PERFIL - DEFINIÇÕES
-    ----------------------------- */
-
-    document
-        .getElementById("settingsBtn")
-        .addEventListener("click",function(){
-
-            showPage("settings");
-        });
-
-    document
-        .getElementById("statementBtn")
-        .addEventListener("click",function(){
-
-            renderTransactions();
-            showPage("statement");
-        });
-
-    document
-        .getElementById("helpBtn")
-        .addEventListener("click",function(){
-
-            showPage("help");
-        });
-
-    /* -----------------------------
-       VOLTAR
-    ----------------------------- */
-
-    document
-        .getElementById("backFromSettings")
-        .addEventListener("click",function(){
-
-            showPage("profile");
-        });
-
-    document
-        .getElementById("backFromHelp")
-        .addEventListener("click",function(){
-
-            showPage("profile");
-        });
-
-    document
-        .getElementById("backFromStatement")
-        .addEventListener("click",function(){
-
-            showPage("profile");
-        });
-
-    /* -----------------------------
-       LIMPAR DADOS
-    ----------------------------- */
-
-    document
-        .getElementById("clearDataBtn")
-        .addEventListener("click",function(){
-
-            const confirmation =
-                confirm(
-                    "Queres apagar a conta e todos os dados da demonstração?"
-                );
-
-            if(!confirmation){
-                return;
-            }
-
-            localStorage.removeItem("tripleBankUser");
-            localStorage.removeItem("tripleBankLogged");
-
-            showToast("Dados apagados.");
-
-            setTimeout(function(){
-
-                showPage("home");
-
-            },500);
-        });
-
-    /* -----------------------------
-       LOGOUT
-    ----------------------------- */
-
-    document
-        .getElementById("logoutBtn")
-        .addEventListener("click",function(){
-
-            localStorage.removeItem(
-                "tripleBankLogged"
-            );
-
-            showToast(
-                "Sessão terminada."
-            );
-
-            setTimeout(function(){
-
-                showPage("home");
-
-            },500);
-        });
-
-    /* -----------------------------
-       FECHAR MODAIS AO CLICAR FORA
-    ----------------------------- */
-
-    addModal.addEventListener("click",function(event){
-
-        if(event.target === addModal){
-            closeAddModal();
-        }
-    });
-
-    sendModal.addEventListener("click",function(event){
-
-        if(event.target === sendModal){
-            closeSendModal();
-        }
-    });
-
-    /* -----------------------------
-       TECLA ENTER NOS CAMPOS
-    ----------------------------- */
-
-    document
-        .getElementById("loginPassword")
-        .addEventListener("keydown",function(event){
-
-            if(event.key === "Enter"){
-                document
-                    .getElementById("loginBtn")
-                    .click();
-            }
-        });
-
-    document
-        .getElementById("registerPassword")
-        .addEventListener("keydown",function(event){
-
-            if(event.key === "Enter"){
-                document
-                    .getElementById("registerBtn")
-                    .click();
-            }
-        });
-
-    /* -----------------------------
-       INICIALIZAÇÃO
-    ----------------------------- */
-
-    const user = getUser();
-
-    const logged =
-        localStorage.getItem("tripleBankLogged");
-
-    if(user && logged === "true"){
-
-        updateDashboard();
-
-        showPage("dashboard");
-
-    }else{
-
-        showPage("home");
-    }
+if(user&&logged==="true"){
+updateDashboard();
+showPage("dashboard");
+}else{
+showPage("home");
+}
 
 });
 </script>
-
 </body>
 </html>
